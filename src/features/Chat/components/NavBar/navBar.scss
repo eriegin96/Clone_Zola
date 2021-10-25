@@ -1,0 +1,80 @@
+.navbar {
+	width: 64px;
+	height: 100%;
+	background-color: #0190f3;
+
+	.navbar__avatar-box {
+		height: 96px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.navbar__avatar {
+			cursor: pointer;
+			height: 48px;
+			width: 48px;
+		}
+	}
+
+	.navbar__btn {
+		height: 60px;
+		background-color: #0190f3;
+		border: none;
+		outline: none;
+		color: #fff;
+		cursor: pointer;
+	}
+
+	.navbar__btn--active {
+		height: 60px;
+		background-color: #006edc;
+		border: none;
+		outline: none;
+		color: #fff;
+		cursor: pointer;
+	}
+
+	.navbar__btn:hover {
+		background-color: #40adff;
+	}
+}
+
+ul.MuiMenu-list {
+  padding-bottom: 0;
+
+	.navbar__avatar__menu__item {
+		span {
+			margin-left: 4px;
+			font-size: 13px;
+		}
+	}
+
+	.navbar__avatar__menu__item + .MuiDivider-root.navbar__avatar__menu__divider {
+		margin-top: 4px;
+    margin-bottom: 4px;
+	}
+
+	.navbar__avatar__menu__invite {
+		background-color: #0068ff;
+		height: 74px;
+		padding: 0 9px 0 16px;
+		cursor: pointer;
+
+		span {
+			display: inline-flex;
+			align-items: center;
+			width: 100px;
+			font-size: 13px;
+			color: #fff;
+			vertical-align: center;
+		}
+
+		.navbar__avatar__menu__img {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+			width: 93px;
+			height: 54px;
+		}
+	}
+}

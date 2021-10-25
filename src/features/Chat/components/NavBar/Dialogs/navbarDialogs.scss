@@ -1,0 +1,138 @@
+.invite-dialog {
+	.invite-dialog__close-btn {
+		position: relative;
+		right: 0;
+	}
+
+	.ant-input-prefix {
+		svg {
+			color: #87939f;
+		}
+	}
+
+	.invite-dialog__search-box {
+		border-top: 1px solid rgba(0, 0, 0, 0.12);
+		padding: 16px;
+
+		.invite-dialog__chip-box {
+			justify-content: space-between;
+			padding-top: 16px;
+			border-bottom: none;
+		}
+	}
+
+	.invite-dialog__share-box {
+		border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+		height: 230px;
+		padding: 0 16px;
+		overflow: hidden;
+
+		.invite-dialog__share-container {
+			width: 100%;
+			height: 100%;
+			border-top: 1px solid rgba(0, 0, 0, 0.12);
+
+			.invite-dialog__share-list {
+				padding: 4px 0 0;
+				height: 100%;
+				overflow: auto;
+			}
+
+			.invite-dialog__share-selected {
+				border: 1px solid #e1e4ea;
+				padding: 12px 0 0 12px;
+				height: 100%;
+
+				& > div:first-of-type {
+					margin-bottom: 8px;
+				}
+
+				.invite-dialog__share-counter {
+					font-size: 12px;
+					font-weight: 600;
+					color: #0068ff;
+					background-color: #e5efff;
+					margin-left: 4px;
+					padding: 2px 8px;
+				}
+				.invite-dialog__share-selected-list {
+					height: 150px;
+					overflow: auto;
+
+					.invite-dialog__share-selected-item {
+						margin-bottom: 6px;
+						width: 158px;
+						justify-content: space-between;
+						color: #0068ff;
+
+						svg {
+							color: #fff;
+						}
+
+						& > svg {
+							color: #0068ff;
+						}
+					}
+				}
+			}
+
+			.invite-dialog__share-list::-webkit-scrollbar,
+			.invite-dialog__share-selected-list::-webkit-scrollbar {
+				width: 8px;
+			}
+
+			.invite-dialog__share-list::-webkit-scrollbar-track,
+			.invite-dialog__share-selected-list::-webkit-scrollbar-track {
+				visibility: none;
+			}
+
+			.invite-dialog__share-list::-webkit-scrollbar-thumb,
+			.invite-dialog__share-selected-list::-webkit-scrollbar-thumb {
+				background: #b9c0c7;
+				border-radius: 5px;
+			}
+		}
+
+		& > svg {
+			position: relative;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			font-size: 100px;
+			color: #abb4bc;
+		}
+	}
+
+	.invite-dialog__content-box {
+		padding: 12px 16px;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+		.invite-dialog__img-box {
+			margin-top: 8px;
+			display: flex;
+			align-items: center;
+			background-color: #f4f5f7;
+			padding: 8px 12px;
+
+			.invite-dialog__img {
+				width: 32px;
+				height: 32px;
+				border-radius: 5px;
+				object-fit: cover;
+			}
+
+			.invite-dialog__img + div {
+				font-size: 13px;
+				margin-left: 8px;
+
+				div:last-child {
+					font-weight: 600;
+				}
+			}
+		}
+	}
+
+	.invite-dialog__btn {
+		font-weight: 600;
+	}
+}

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Tabs, Tab, Typography, Box, Button } from '@mui/material';
-import LoginForm from './LoginForm';
+import { Tabs, Tab, Typography, Box } from '@mui/material';
 import { AppContext } from '../../../context/AppProvider';
+import LoginForm from './LoginForm';
 import LoginQrError from './LoginQrError';
 
 function TabPanel(props) {

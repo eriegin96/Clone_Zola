@@ -10,14 +10,14 @@ import AppProvider from './context/AppProvider';
 
 ReactDOM.render(
 	<React.StrictMode>
-		<AuthProvider>
+		{/* <AuthProvider> */}
 			<AppProvider>
 				<BrowserRouter>
 					<CssBaseline />
 					<App />
 				</BrowserRouter>
 			</AppProvider>
-		</AuthProvider>
+		{/* </AuthProvider> */}
 	</React.StrictMode>,
 	document.getElementById('root')
 );

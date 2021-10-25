@@ -1,0 +1,23 @@
+$convList-width: 300px;
+
+.chat-page {
+	display: flex;
+	height: 100vh;
+
+	.sidebar {
+		position: relative;
+		min-width: calc($convList-width + 64px);
+		max-width: calc($convList-width + 50px + 64px);
+		display: flex;
+
+		.conv-list {
+			width: $convList-width;
+			height: 100%;
+			background-color: #ddd;
+		}
+	}
+
+	.chat-window {
+		flex: 1;
+	}
+}
