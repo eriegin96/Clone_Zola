@@ -25,7 +25,7 @@ export default function NavBarAvatar() {
 				onClose={handleClose}
 				onClick={handleClose}
 				PaperProps={{
-					elevation: 0,
+					elevation: 3,
 					sx: {
 						width: '218px',
 					},

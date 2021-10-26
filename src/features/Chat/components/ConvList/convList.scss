@@ -1,0 +1,43 @@
+.conv-list__search__box {
+	padding: 20px 4px 10px 10px;
+
+	.conv-list__search__input {
+		width: 198px;
+		margin-right: 8px;
+		border-radius: 20px;
+		background-color: #e8eaef;
+
+		.ant-input-prefix {
+			svg {
+				color: #87939f;
+			}
+		}
+
+		.ant-input {
+			background-color: #e8eaef;
+		}
+
+		.ant-input:focus {
+			background-color: #fff;
+		}
+
+		.ant-input-affix-wrapper-focused {
+			background-color: unset;
+		}
+	}
+}
+
+.conv-list__star__img-box {
+	margin: 15px 14px;
+	text-align: center;
+
+	.conv-list__star__img {
+		margin: 70px auto 0;
+	}
+
+	p {
+    margin: 14px 0;
+    padding: 0 26px;
+		color: #abb4bc;
+	}
+}

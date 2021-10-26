@@ -3,6 +3,7 @@ $convList-width: 300px;
 .chat-page {
 	display: flex;
 	height: 100vh;
+	flex-direction: row-reverse;
 
 	.sidebar {
 		position: relative;
@@ -13,7 +14,7 @@ $convList-width: 300px;
 		.conv-list {
 			width: $convList-width;
 			height: 100%;
-			background-color: #ddd;
+			border-right: 1px solid #e1e4ea;
 		}
 	}
 

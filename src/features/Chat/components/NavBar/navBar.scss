@@ -40,7 +40,7 @@
 }
 
 ul.MuiMenu-list {
-  padding-bottom: 0;
+	padding-bottom: 0;
 
 	.navbar__avatar__menu__item {
 		span {
@@ -51,7 +51,7 @@ ul.MuiMenu-list {
 
 	.navbar__avatar__menu__item + .MuiDivider-root.navbar__avatar__menu__divider {
 		margin-top: 4px;
-    margin-bottom: 4px;
+		margin-bottom: 4px;
 	}
 
 	.navbar__avatar__menu__invite {
@@ -70,11 +70,46 @@ ul.MuiMenu-list {
 		}
 
 		.navbar__avatar__menu__img {
-      position: relative;
-      top: 50%;
-      transform: translateY(-50%);
+			position: relative;
+			top: 50%;
+			transform: translateY(-50%);
 			width: 93px;
 			height: 54px;
 		}
+	}
+
+	.navbar__setting__menu__item {
+		position: relative;
+		.navbar__setting__text {
+			font-size: 13px;
+			margin-left: 8px;
+			flex-grow: 1;
+		}
+
+		.navbar__setting__arrow-right {
+			color: #adbbd5;
+		}
+	}
+
+	.navbar__setting__menu__sav {
+		.navbar__setting__menu__save1 {
+			display: none;
+		}
+	}
+
+	.navbar__setting__menu__save {
+		.navbar__setting__menu__save1 {
+			display: block;
+			position: absolute;
+			left: 80%;
+			top: 0;
+		}
+	}
+
+	.navbar__setting__logout {
+		color: #db342e;
+		font-size: 13px;
+		margin-left: 30px;
+		margin-bottom: 8px;
 	}
 }

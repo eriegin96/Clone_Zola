@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './navBar.scss';
 import './Dialogs/navbarDialogs.scss';
 import { Box, Stack } from '@mui/material';
@@ -14,21 +14,18 @@ import CloudIcon from '@mui/icons-material/Cloud';
 import CloudQueueIcon from '@mui/icons-material/CloudQueue';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import SettingsIcon from '@mui/icons-material/Settings';
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import NavBarAvatar from './NavBarAvatar';
+import NavBarSetting from './NavBarSetting';
+import { AppContext } from '../../../../context/AppProvider';
 
 export default function NavBar() {
-	const initialActiveTab = {
-		chatTab: false,
-		contactTab: false,
-		notiTab: false,
-		todoTab: false,
-		cloudTab: false,
-		bookmarkTab: false,
-		settingTab: false,
-	};
-	const [activeTab, setActiveTab] = useState({ ...initialActiveTab, chatTab: true });
+	const {
+		initialActiveTab,
+		activeTab,
+		setActiveTab,
+		initialActiveChatWindow,
+		setActiveChatWindow,
+	} = useContext(AppContext);
 
 	return (
 		<React.Fragment>
@@ -36,12 +33,12 @@ export default function NavBar() {
 				<NavBarAvatar />
 				<button
 					title="Tin nhắn"
-					className={activeTab.chatTab ? 'navbar__btn--active' : 'navbar__btn'}
+					className={activeTab.chat ? 'navbar__btn--active' : 'navbar__btn'}
 					onClick={() => {
-						setActiveTab({ ...initialActiveTab, chatTab: true });
+						setActiveTab({ ...initialActiveTab, chat: true });
 					}}
 				>
-					{activeTab.chatTab ? (
+					{activeTab.chat ? (
 						<ChatIcon sx={{ fontSize: '30px' }} />
 					) : (
 						<ChatOutlinedIcon sx={{ fontSize: '30px' }} />
@@ -49,12 +46,13 @@ export default function NavBar() {
 				</button>
 				<button
 					title="Danh bạ"
-					className={activeTab.contactTab ? 'navbar__btn--active' : 'navbar__btn'}
+					className={activeTab.contact ? 'navbar__btn--active' : 'navbar__btn'}
 					onClick={() => {
-						setActiveTab({ ...initialActiveTab, contactTab: true });
+						setActiveTab({ ...initialActiveTab, contact: true });
+						setActiveChatWindow({ ...initialActiveChatWindow, addFriend: true });
 					}}
 				>
-					{activeTab.contactTab ? (
+					{activeTab.contact ? (
 						<ContactsIcon sx={{ fontSize: '30px' }} />
 					) : (
 						<ContactsOutlinedIcon sx={{ fontSize: '30px' }} />
@@ -62,12 +60,12 @@ export default function NavBar() {
 				</button>
 				<button
 					title="Thông báo"
-					className={activeTab.notiTab ? 'navbar__btn--active' : 'navbar__btn'}
+					className={activeTab.noti ? 'navbar__btn--active' : 'navbar__btn'}
 					onClick={() => {
-						setActiveTab({ ...initialActiveTab, notiTab: true });
+						setActiveTab({ ...initialActiveTab, noti: true });
 					}}
 				>
-					{activeTab.notiTab ? (
+					{activeTab.noti ? (
 						<NotificationsIcon sx={{ fontSize: '30px' }} />
 					) : (
 						<NotificationsNoneIcon sx={{ fontSize: '30px' }} />
@@ -75,12 +73,12 @@ export default function NavBar() {
 				</button>
 				<button
 					title="To-Do"
-					className={activeTab.todoTab ? 'navbar__btn--active' : 'navbar__btn'}
+					className={activeTab.todo ? 'navbar__btn--active' : 'navbar__btn'}
 					onClick={() => {
-						setActiveTab({ ...initialActiveTab, todoTab: true });
+						setActiveTab({ ...initialActiveTab, todo: true });
 					}}
 				>
-					{activeTab.todoTab ? (
+					{activeTab.todo ? (
 						<CheckBoxIcon sx={{ fontSize: '30px' }} />
 					) : (
 						<CheckBoxOutlinedIcon sx={{ fontSize: '30px' }} />
@@ -89,43 +87,32 @@ export default function NavBar() {
 				<Box sx={{ flexGrow: 1 }} />
 				<button
 					title="Cloud của tôi"
-					className={activeTab.cloudTab ? 'navbar__btn--active' : 'navbar__btn'}
+					className={activeTab.cloud ? 'navbar__btn--active' : 'navbar__btn'}
 					onClick={() => {
-						setActiveTab({ ...initialActiveTab, cloudTab: true });
+						setActiveTab({ ...initialActiveTab, chat: true });
+						setActiveChatWindow({ ...initialActiveChatWindow, chat: true });
 					}}
 				>
-					{activeTab.cloudTab ? (
-						<CloudIcon sx={{ fontSize: '30px' }} />
-					) : (
-						<CloudQueueIcon sx={{ fontSize: '30px' }} />
-					)}
+					<CloudQueueIcon sx={{ fontSize: '30px' }} />
 				</button>
 				<button
 					title="Đánh dấu"
-					className={activeTab.starTab ? 'navbar__btn--active' : 'navbar__btn'}
+					className={activeTab.star ? 'navbar__btn--active' : 'navbar__btn'}
 					onClick={() => {
-						setActiveTab({ ...initialActiveTab, starTab: true });
+						setActiveTab({ ...initialActiveTab, star: true });
 					}}
 				>
-					{activeTab.starTab ? (
+					{activeTab.star ? (
 						<StarIcon sx={{ fontSize: '30px' }} />
 					) : (
 						<StarBorderIcon sx={{ fontSize: '30px' }} />
 					)}
 				</button>
-				<button
-					title="Cài đặt"
-					className={activeTab.settingTab ? 'navbar__btn--active' : 'navbar__btn'}
-					onClick={() => {
-						setActiveTab({ ...initialActiveTab, settingTab: true });
-					}}
-				>
-					{activeTab.settingTab ? (
-						<SettingsIcon sx={{ fontSize: '30px' }} />
-					) : (
-						<SettingsOutlinedIcon sx={{ fontSize: '30px' }} />
-					)}
-				</button>
+				<NavBarSetting
+					initialActiveTab={initialActiveTab}
+					activeTab={activeTab}
+					setActiveTab={setActiveTab}
+				/>
 			</Stack>
 		</React.Fragment>
 	);

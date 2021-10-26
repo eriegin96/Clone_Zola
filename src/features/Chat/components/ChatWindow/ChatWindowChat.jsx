@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function ResizeHandler() {
+export default function ChatWindowChat() {
   return (
     <div>
-      Resize
+      Chat
     </div>
   )
 }

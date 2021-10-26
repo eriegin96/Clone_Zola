@@ -1,0 +1,60 @@
+.chat-window__start__wrapper {
+	display: flex;
+	flex-flow: column-reverse;
+	align-items: center;
+	text-align: center;
+	height: 100%;
+
+	.chat-window__start__container {
+		width: 415px;
+
+		.chat-window__start__header {
+			margin-top: 42px;
+		}
+	}
+
+	.Carousel-root-1 {
+		width: 565px;
+		margin: 40px auto 0;
+		flex-grow: 1;
+
+		.chat-window__carousel__img {
+			width: 380px;
+		}
+
+		.chat-window__carousel__title {
+			color: #0068ff;
+			font-weight: 600;
+			font-size: 18px;
+			margin-top: 20px;
+			margin-bottom: 10px;
+			padding: 0 30px;
+		}
+
+		.chat-window__carousel__des {
+			padding: 0 32px;
+		}
+
+		.Carousel-buttonWrapper-6 {
+			.chat-window__carousel__nav-btn {
+				svg {
+					font-size: 40px;
+				}
+			}
+		}
+
+		.Carousel-buttonWrapper-6:hover {
+			.chat-window__carousel__nav-btn {
+				opacity: unset;
+
+				svg {
+					color: #0068ff;
+				}
+			}
+
+			.chat-window__carousel__nav-btn:hover {
+				opacity: unset !important;
+			}
+		}
+	}
+}
