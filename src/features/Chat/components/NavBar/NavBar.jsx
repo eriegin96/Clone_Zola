@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import './navBar.scss';
 import './Dialogs/navbarDialogs.scss';
 import { Box, Stack } from '@mui/material';
@@ -10,7 +10,6 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
-import CloudIcon from '@mui/icons-material/Cloud';
 import CloudQueueIcon from '@mui/icons-material/CloudQueue';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';

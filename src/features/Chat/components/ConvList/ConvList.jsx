@@ -4,8 +4,8 @@ import './convList.scss';
 import ConvSearch from './ConvSearch';
 import ConvListChat from './ConvListChat';
 import ConvListContact from './ConvListContact';
-import ConvListNoti from './ConvListNoti';
-import ConvListTodo from './ConvListTodo';
+import ConvListNoti from './Noti/ConvListNoti';
+import ConvListTodo from './Todo/ConvListTodo';
 import ConvListStar from './ConvListStar';
 
 export default function ConvList() {
