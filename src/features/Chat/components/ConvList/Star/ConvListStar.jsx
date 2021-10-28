@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from '@mui/material';
-import img from '../../../../resources/img/conv-list/star.png';
+import img from '../../../../../resources/img/conv-list/star.png';
 
 export default function ConvListStar() {
 	return (

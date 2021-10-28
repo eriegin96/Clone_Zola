@@ -75,22 +75,6 @@
 					}
 				}
 			}
-
-			.invite-dialog__share-list::-webkit-scrollbar,
-			.invite-dialog__share-selected-list::-webkit-scrollbar {
-				width: 8px;
-			}
-
-			.invite-dialog__share-list::-webkit-scrollbar-track,
-			.invite-dialog__share-selected-list::-webkit-scrollbar-track {
-				visibility: none;
-			}
-
-			.invite-dialog__share-list::-webkit-scrollbar-thumb,
-			.invite-dialog__share-selected-list::-webkit-scrollbar-thumb {
-				background: #b9c0c7;
-				border-radius: 5px;
-			}
 		}
 
 		& > svg {

@@ -48,7 +48,8 @@ export default function ConvListNoti() {
 			>
 				<Tab label="Ưu tiên" {...tabProps(0)} className="conv-list__noti__tab" />
 				<Tab label="Khác" {...tabProps(1)} className="conv-list__noti__tab" />
-				<Tab disabled />
+				<Tab disabled className="conv-list__noti__tab"/>
+				<Tab disabled className="conv-list__noti__tab"/>
 			</Tabs>
 			<div className='conv-list__noti__select'>
 				<span>Tất cả</span>

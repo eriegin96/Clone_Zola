@@ -14,7 +14,12 @@ export default function AppProvider({ children }) {
 		bookmark: false,
 		setting: false,
 	};
-	const initialActiveChatWindow = { start: false, chat: false, addFriend: false };
+	const initialActiveChatWindow = {
+		start: false,
+		chat: false,
+		addFriend: false,
+		addGroup: false,
+	};
 	const [activeTab, setActiveTab] = useState({ ...initialActiveTab, chat: true });
 	const [activeChatWindow, setActiveChatWindow] = useState({
 		...initialActiveChatWindow,
