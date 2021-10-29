@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
 	Chip,
 	Divider,
@@ -11,8 +11,7 @@ import {
 	Accordion,
 	Typography,
 	AccordionDetails,
-	Menu,
-	MenuItem,
+	Button,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
@@ -20,7 +19,9 @@ import SettingsApplicationsOutlinedIcon from '@mui/icons-material/SettingsApplic
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
+import img from '../../../../../resources/img/conv-list/label.png';
+import { AppContext } from '../../../../../context/AppProvider';
+import ChatMenu from './ChatMenu';
 
 const cates = [
 	{
@@ -57,6 +58,7 @@ const AccordionSummary = styled((props) => <MuiAccordionSummary {...props} />)((
 }));
 
 export default function ConvListChat() {
+	const { recentChatList, initialActiveChatWindow, setActiveChatWindow } = useContext(AppContext);
 	const initialActiveCate = {
 		all: false,
 		client: false,
@@ -67,15 +69,8 @@ export default function ConvListChat() {
 	};
 	const [activeCate, setActiveCate] = useState({ ...initialActiveCate, all: true });
 	const [height, setHeight] = useState('48px');
-	const contactList = useMemo(() => {
-		const arr = [];
-		for (let i = 0; i < 20; i++) {
-			arr.push(i);
-		}
-		return arr;
-	}, []);
-	const [anchorEl, setAnchorEl] = useState(() => Array(contactList.length).fill(null));
-	const [open, setOpen] = useState(() => Array(contactList.length).fill(false));
+	const [anchorEl, setAnchorEl] = useState(() => Array(recentChatList.length).fill(null));
+	const [open, setOpen] = useState(() => Array(recentChatList.length).fill(false));
 
 	const handleOpen = (event, i) => {
 		const newAnchorEl = [...anchorEl];
@@ -140,114 +135,69 @@ export default function ConvListChat() {
 					</span>
 					<span>Đánh dấu đã đọc</span>
 				</div>
-				<List
-					sx={{
-						height: `calc(536px - ${height})`,
-						width: '100%',
-						bgcolor: 'background.paper',
-						overflow: 'auto',
-					}}
-					dense
-					component="div"
-					role="list"
-					className="conv-list__contact__list"
-				>
-					{contactList.map((value, i) => {
-						const labelId = `item-${value}-label`;
-						return (
-							<React.Fragment key={i}>
-								<ListItem
-									role="listitem"
-									button
-									disableRipple
-									secondaryAction={
-										<IconButton
-											edge="end"
-											aria-label="comments"
-											disableRipple
-											onClick={(e) => handleOpen(e, i)}
-										>
-											<MoreHorizOutlinedIcon />
-										</IconButton>
-									}
-									sx={{ padding: '10px 0 10px 10px', width: '100%' }}
-								>
-									<ListItemIcon>
-										<Avatar sx={{ width: '48px', height: '48px' }} />
-									</ListItemIcon>
-									<ListItemText id={labelId} primary={`Danh bạ ${value}`} />
-								</ListItem>
-								<Menu
-									anchorEl={anchorEl[i]}
-									open={open[i]}
-									onClose={() => handleClose(i)}
-									onClick={() => handleClose(i)}
-									PaperProps={{
-										elevation: 2,
-										sx: {
-											width: '158px',
-										},
-									}}
-									transformOrigin={{ horizontal: 'left', vertical: 'bottom' }}
-									anchorOrigin={{ horizontal: 'center', vertical: 'top' }}
-								>
-									<MenuItem className="conv-list__chat__menu__item">
-										<span className="conv-list__chat__text">Phân loại {i}</span>
-										<ChevronRightOutlinedIcon
-											fontSize="small"
-											className="conv-list__chat__arrow-right"
-										/>
-									</MenuItem>
-									<MenuItem className="conv-list__chat__menu__item">
-										<span className="conv-list__chat__text">
-											Đánh dấu chưa đọc
-										</span>
-									</MenuItem>
-									<Divider
-										variant="middle"
-										sx={{ margin: '4px 16px !important' }}
+				{activeCate.all ? (
+					<List
+						sx={{
+							height: `calc(536px - ${height})`,
+							width: '100%',
+							bgcolor: 'background.paper',
+							overflow: 'auto',
+						}}
+						dense
+						component="div"
+						role="list"
+						className="conv-list__contact__list"
+					>
+						{recentChatList.map((value, i) => {
+							const labelId = `item-${value}-label`;
+							return (
+								<React.Fragment key={i}>
+									<ListItem
+										role="listitem"
+										button
+										disableRipple
+										onClick={() => {
+											setActiveChatWindow({
+												...initialActiveChatWindow,
+												chat: true,
+											});
+										}}
+										secondaryAction={
+											<IconButton
+												edge="end"
+												aria-label="settings"
+												disableRipple
+												onClick={(e) => handleOpen(e, i)}
+											>
+												<MoreHorizOutlinedIcon />
+											</IconButton>
+										}
+										sx={{ padding: '10px 0 10px 10px', width: '100%' }}
+									>
+										<ListItemIcon>
+											<Avatar sx={{ width: '48px', height: '48px' }} />
+										</ListItemIcon>
+										<ListItemText id={labelId} primary={`Mới đây ${value}`} />
+									</ListItem>
+									<ChatMenu
+										anchorEl={anchorEl}
+										open={open}
+										handleClose={handleClose}
+										i={i}
 									/>
-									<MenuItem className="conv-list__chat__menu__item conv-list__chat__menu__save">
-										<span className="conv-list__chat__text">Thêm vào nhóm</span>
-									</MenuItem>
-									<MenuItem className="conv-list__chat__menu__item">
-										<span className="conv-list__chat__text">Tắt thông báo</span>
-										<ChevronRightOutlinedIcon
-											fontSize="small"
-											className="conv-list__chat__arrow-right"
-										/>
-									</MenuItem>
-									<MenuItem className="conv-list__chat__menu__item">
-										<span className="conv-list__chat__text">Ẩn trò chuyện</span>
-									</MenuItem>
-									<MenuItem className="conv-list__chat__menu__item">
-										<span className="conv-list__chat__text">
-											Tin nhắn tự xóa
-										</span>
-										<ChevronRightOutlinedIcon
-											fontSize="small"
-											className="conv-list__chat__arrow-right"
-										/>
-									</MenuItem>
-									<Divider
-										variant="middle"
-										sx={{ margin: '4px 16px !important' }}
-									/>
-									<MenuItem className="conv-list__chat__menu__item">
-										<div className="conv-list__chat__delete">Xóa hội thoại</div>
-									</MenuItem>
-									<Divider
-										variant="middle"
-										sx={{ margin: '4px 16px !important' }}
-									/>
-									<MenuItem className="conv-list__chat__menu__item">
-										<span className="conv-list__chat__text">Báo xấu</span>
-									</MenuItem>
-								</Menu>
-							</React.Fragment>
-						);
-					})}
-				</List>
+								</React.Fragment>
+							);
+						})}
+					</List>
+				) : (
+					<div className="conv-list__chat__list--empty">
+						<img src={img} alt="empty" />
+						<div>Phân loại hội thoại để ghi nhớ và nhận biết dễ dàng hơn</div>
+						<Button variant="contained" color="secondary">
+							Thêm hội thoại
+						</Button>
+					</div>
+				)}
 			</div>
 		</div>
 	);

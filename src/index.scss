@@ -22,6 +22,8 @@ code {
 
 *::-webkit-scrollbar {
 	width: 8px;
+	position: absolute;
+	background-color: transparent;
 }
 *::-webkit-scrollbar-track {
 	display: none;

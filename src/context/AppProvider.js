@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useMemo, useState } from 'react';
 import { AuthContext } from './AuthProvider';
 
 export const AppContext = createContext();
@@ -26,6 +26,40 @@ export default function AppProvider({ children }) {
 		start: true,
 	});
 
+	// ConvListChat
+	const recentChatList = useMemo(() => {
+		const arr = [];
+		for (let i = 0; i < 20; i++) {
+			arr.push(i);
+		}
+		return arr;
+	}, []);
+
+	// ConvListContact
+	const contactList = useMemo(() => {
+		const arr = [];
+		for (let i = 0; i < 20; i++) {
+			arr.push(i);
+		}
+		return arr;
+	}, []);
+
+	// ChatWindowAdd
+	const suggestList = useMemo(() => {
+		const arr = [];
+		for (let i = 1; i <= 50; i++) {
+			arr.push(i);
+		}
+		return arr;
+	}, []);
+	const groupList = useMemo(() => {
+		const arr = [];
+		for (let i = 0; i < 18; i++) {
+			arr.push(i);
+		}
+		return arr;
+	}, []);
+
 	return (
 		<AppContext.Provider
 			value={{
@@ -37,6 +71,10 @@ export default function AppProvider({ children }) {
 				initialActiveChatWindow,
 				activeChatWindow,
 				setActiveChatWindow,
+				recentChatList,
+				contactList,
+				suggestList,
+				groupList,
 			}}
 		>
 			{children}

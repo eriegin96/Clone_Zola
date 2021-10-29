@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
 	Button,
 	Dialog,
@@ -15,8 +15,37 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import { Input } from 'antd';
 import img from '../../../../../../resources/img/invite-dialog.png';
 import ShareList from './ShareList';
+import { AppContext } from '../../../../../../context/AppProvider';
+
+const cates = [
+	{
+		label: 'Tất cả',
+		type: 'all',
+	},
+	{
+		label: 'Khách hàng',
+		type: 'client',
+	},
+	{
+		label: 'Gia đình',
+		type: 'family',
+	},
+	{
+		label: 'Công việc',
+		type: 'work',
+	},
+	{
+		label: 'Bạn bè',
+		type: 'friends',
+	},
+	{
+		label: 'Trả lời sau',
+		type: 'later',
+	},
+];
 
 export default function InviteDialog({ open, setOpen }) {
+	const { contactList } = useContext(AppContext);
 	const initialChipActive = {
 		all: false,
 		client: false,
@@ -26,13 +55,6 @@ export default function InviteDialog({ open, setOpen }) {
 		later: false,
 	};
 	const [chipActive, setChipActive] = useState({ ...initialChipActive, all: true });
-	const contactList = useMemo(() => {
-		const arr = [];
-		for (let i = 1; i <= 20; i++) {
-			arr.push(i);
-		}
-		return arr;
-	}, []);
 	const [selectedList, setSelectedList] = useState([]);
 
 	const handleCloseDialog = () => {
@@ -83,64 +105,32 @@ export default function InviteDialog({ open, setOpen }) {
 						style={{ borderRadius: '20px' }}
 					/>
 					<Stack direction="row" className="invite-dialog__chip-box">
-						<Chip
-							label="Tất cả"
-							size="small"
-							color={chipActive.all ? 'primary' : 'default'}
-							sx={{ padding: '0 3px' }}
-							onClick={() => {
-								setChipActive({ ...initialChipActive, all: true });
-							}}
-						></Chip>
-						<Chip
-							label="Khách hàng"
-							size="small"
-							color={chipActive.client ? 'primary' : 'default'}
-							sx={{ padding: '0 3px' }}
-							onClick={() => {
-								setChipActive({ ...initialChipActive, client: true });
-							}}
-						></Chip>
-						<Chip
-							label="Gia đình"
-							size="small"
-							color={chipActive.family ? 'primary' : 'default'}
-							sx={{ padding: '0 3px' }}
-							onClick={() => {
-								setChipActive({ ...initialChipActive, family: true });
-							}}
-						></Chip>
-						<Chip
-							label="Công việc"
-							size="small"
-							color={chipActive.work ? 'primary' : 'default'}
-							sx={{ padding: '0 3px' }}
-							onClick={() => {
-								setChipActive({ ...initialChipActive, work: true });
-							}}
-						></Chip>
-						<Chip
-							label="Bạn bè"
-							size="small"
-							color={chipActive.friends ? 'primary' : 'default'}
-							sx={{ padding: '0 3px' }}
-							onClick={() => {
-								setChipActive({ ...initialChipActive, friends: true });
-							}}
-						></Chip>
-						<Chip
-							label="Trả lời sau"
-							size="small"
-							color={chipActive.later ? 'primary' : 'default'}
-							sx={{ padding: '0 3px' }}
-							onClick={() => {
-								setChipActive({ ...initialChipActive, later: true });
-							}}
-						></Chip>
+						{cates.map((cate, i) => (
+							<Chip
+								key={i}
+								label={cate.label}
+								color={chipActive[cate.type] ? 'primary' : 'default'}
+								size="small"
+								sx={{ margin: '0 3px' }}
+								onClick={() => {
+									const active = { ...initialChipActive };
+									active[cate.type] = true;
+									setChipActive(active);
+								}}
+							/>
+						))}
 					</Stack>
 				</div>
 				<div className="invite-dialog__share-box">
-					{chipActive.all ? <ShareList left={contactList} right={selectedList} setRight={setSelectedList}/> : <FormatListBulletedIcon />}
+					{chipActive.all ? (
+						<ShareList
+							left={contactList}
+							right={selectedList}
+							setRight={setSelectedList}
+						/>
+					) : (
+						<FormatListBulletedIcon />
+					)}
 				</div>
 				<div className="invite-dialog__content-box">
 					<Typography variant="body2" component="span">

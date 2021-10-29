@@ -1,8 +1,7 @@
-$cate-height: 110px;
-
 .conv-list {
 	height: 100%;
 	overflow: hidden;
+	background-color: #fff;
 
 	.conv-list__search__box {
 		padding: 20px 4px 10px 10px;
@@ -87,6 +86,33 @@ $cate-height: 110px;
 				padding: 0;
 				overflow: auto;
 			}
+
+			.conv-list__chat__list--empty {
+				height: 300px;
+				display: flex;
+				flex-flow: column;
+				justify-content: center;
+				align-items: center;
+				text-align: center;
+
+				img {
+					width: 80px;
+				}
+
+				div {
+					max-width: 250px;
+					color: #72808e;
+					font-size: 15px;
+					margin: 15px 0;
+				}
+
+				button {
+					text-transform: none;
+					color: #0068ff;
+					font-weight: 600;
+					box-shadow: none;
+				}
+			}
 		}
 	}
 
@@ -118,7 +144,7 @@ $cate-height: 110px;
 					height: 15px;
 					background-repeat: no-repeat;
 					background-size: cover;
-					background-image: url('../../../../resources/img/conv-list/badge.png');
+					background-image: url('../../../../resources/img/badge.png');
 				}
 			}
 

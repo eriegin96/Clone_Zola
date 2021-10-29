@@ -13,7 +13,7 @@ export default function ChatWindow() {
 		<div className="chat-window">
 			{start && <ChatWindowStart />}
 			{chat && <ChatWindowChat />}
-			{(addFriend || addGroup) && <ChatWindowAdd add={addFriend}/>}
+			{(addFriend || addGroup) && <ChatWindowAdd addFriend={addFriend}/>}
 		</div>
 	);
 }

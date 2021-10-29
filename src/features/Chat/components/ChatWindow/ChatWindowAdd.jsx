@@ -1,10 +1,86 @@
-import React from 'react'
+import React, { useContext } from 'react';
+import { Avatar, Typography, Paper, Grid, Button, AvatarGroup } from '@mui/material';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ImportExportIcon from '@mui/icons-material/ImportExport';
+import CloseIcon from '@mui/icons-material/Close';
+import imgAddFriend from '../../../../resources/img/add-friend.png';
+import imgAddGroup from '../../../../resources/img/add-group.png';
+import { AppContext } from '../../../../context/AppProvider';
 
-export default function ChatWindowAdd({add}) {
+export default function ChatWindowAdd({ addFriend }) {
+	const { suggestList, groupList } = useContext(AppContext);
 
-  return (
-    <div>
-      {add ? 'Add Friend' : 'Add Group'}
-    </div>
-  )
+	const handleCloseSuggest = (i) => {
+		console.log(i);
+	};
+
+	return (
+		<div className="chat-window__add">
+			<div className="chat-window__add__header">
+				<img src={addFriend ? imgAddFriend : imgAddGroup} alt="add" />
+				<div className="chat-window__add__badge"></div>
+				<Typography variant="h5" component="span">
+					Danh sách {addFriend ? 'kết bạn' : 'nhóm'}
+				</Typography>
+			</div>
+			<div className="chat-window__add__container">
+				<div className="chat-window__add__title">
+					<Typography variant="body1" component="span">
+						{addFriend ? `Gợi ý kết bạn (${suggestList.length})` : 'Tất cả (18)'}
+						{!addFriend && <ArrowDropDownIcon />}
+					</Typography>
+					{!addFriend && (
+						<div>
+							<ImportExportIcon />
+							Theo tên nhóm (A-Z)
+						</div>
+					)}
+				</div>
+				{addFriend ? (
+					<div className="chat-window__add__suggest-friend-list">
+						<Grid container spacing={2}>
+							{suggestList.map((item, i) => (
+								<Grid item key={i} xs={6}>
+									<Paper elevation={0} className="chat-window__add__suggest-item">
+										<Avatar sx={{ width: 96, height: 96 }} />
+										<div>Gợi ý {i}</div>
+										<div>Từ số điện thoại</div>
+										<div>Chưa có nhóm chung</div>
+										<Button variant="outlined">KẾT BẠN</Button>
+										<CloseIcon
+											className="chat-window__add__close-suggest"
+											onClick={(i) => handleCloseSuggest(i)}
+										/>
+									</Paper>
+								</Grid>
+							))}
+						</Grid>
+					</div>
+				) : (
+					<div className="chat-window__add__group-list">
+						<Grid container spacing={2}>
+								{groupList.map((item, i) => (
+									<Grid item key={i} xs={6}>
+										<Paper
+											elevation={0}
+											className="chat-window__add__group-item"
+										>
+											<AvatarGroup max={4}>
+												<Avatar />
+												<Avatar />
+												<Avatar />
+												<Avatar />
+												<Avatar />
+											</AvatarGroup>
+											<div>Nhóm {i}</div>
+											<div>5 thành viên</div>
+										</Paper>
+									</Grid>
+								))}
+						</Grid>
+					</div>
+				)}
+			</div>
+		</div>
+	);
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { CssBaseline } from '@mui/material';
 import { BrowserRouter } from 'react-router-dom';
+import 'overlayscrollbars/css/OverlayScrollbars.css';
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';

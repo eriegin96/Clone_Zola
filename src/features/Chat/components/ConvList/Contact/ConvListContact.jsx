@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
 	Accordion,
 	AccordionDetails,
@@ -14,22 +14,15 @@ import {
 } from '@mui/material';
 import PersonAddOutlinedIcon from '@mui/icons-material/PersonAddOutlined';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import imgAddFriend from '../../../../../resources/img/conv-list/add-friend.png';
-import imgAddGroup from '../../../../../resources/img/conv-list/add-group.png';
+import imgAddFriend from '../../../../../resources/img/add-friend.png';
+import imgAddGroup from '../../../../../resources/img/add-group.png';
 import imgCloud from '../../../../../resources/img/cloud.jpg';
 import { AppContext } from '../../../../../context/AppProvider';
 
 export default function ConvListContact() {
-	const { initialActiveChatWindow, setActiveChatWindow } = useContext(AppContext);
+	const { initialActiveChatWindow, setActiveChatWindow, contactList } = useContext(AppContext);
 	const initialActiveBtn = { addFriend: false, addGroup: false, cloud: false };
 	const [activeBtn, setActiveBtn] = useState({ ...initialActiveBtn, addFriend: true });
-	const contactList = useMemo(() => {
-		const arr = [];
-		for (let i = 1; i <= 20; i++) {
-			arr.push(i);
-		}
-		return arr;
-	}, []);
 
 	return (
 		<div className="conv-list__contact">
