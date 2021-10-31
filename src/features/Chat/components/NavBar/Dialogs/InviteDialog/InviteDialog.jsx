@@ -13,9 +13,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import { Input } from 'antd';
-import img from '../../../../../../resources/img/invite-dialog.png';
+import img from 'resources/img/invite-dialog.png';
 import ShareList from './ShareList';
-import { AppContext } from '../../../../../../context/AppProvider';
+import { AppContext } from 'context/AppProvider';
 
 const cates = [
 	{

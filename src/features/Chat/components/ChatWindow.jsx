@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import './ChatWindow/chatWindow.scss';
-import { AppContext } from '../../../context/AppProvider';
-import ChatWindowStart from './ChatWindow/ChatWindowStart';
-import ChatWindowChat from './ChatWindow/ChatWindowChat';
-import ChatWindowAdd from './ChatWindow/ChatWindowAdd';
+import { AppContext } from 'context/AppProvider';
+import ChatWindowStart from './ChatWindow/ChatWindowStart/ChatWindowStart';
+import ChatWindowChat from './ChatWindow/ChatWindowChat/ChatWindowChat';
+import ChatWindowAdd from './ChatWindow/ChatWindowAdd/ChatWindowAdd';
 
 export default function ChatWindow() {
 	const { activeChatWindow } = useContext(AppContext);

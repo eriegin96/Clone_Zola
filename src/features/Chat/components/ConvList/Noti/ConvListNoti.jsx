@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Tabs, Tab, Typography, Box } from '@mui/material';
 import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
-import img from '../../../../../resources/img/conv-list/noti.png'
+import img from 'resources/img/conv-list/noti.png';
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -43,26 +43,26 @@ export default function ConvListNoti() {
 				onChange={handleChange}
 				aria-label="noti tabs"
 				variant="fullWidth"
-        TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
+				TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
 				className="conv-list__noti__tabs"
 			>
 				<Tab label="Ưu tiên" {...tabProps(0)} className="conv-list__noti__tab" />
 				<Tab label="Khác" {...tabProps(1)} className="conv-list__noti__tab" />
-				<Tab disabled className="conv-list__noti__tab"/>
-				<Tab disabled className="conv-list__noti__tab"/>
+				<Tab disabled className="conv-list__noti__tab" />
+				<Tab disabled className="conv-list__noti__tab" />
 			</Tabs>
-			<div className='conv-list__noti__select'>
+			<div className="conv-list__noti__select">
 				<span>Tất cả</span>
 				<ArrowDropDownOutlinedIcon />
 			</div>
 			<TabPanel value={value} index={0} className="conv-list__noti__tab-panel">
-        <img src={img} alt="noti" />
+				<img src={img} alt="noti" />
 				<Typography variant="body2" component="div">
 					Danh sách bạn chọn đang trống.
 				</Typography>
 			</TabPanel>
 			<TabPanel value={value} index={1} className="conv-list__noti__tab-panel">
-        <img src={img} alt="noti" />
+				<img src={img} alt="noti" />
 				<Typography variant="body2" component="div">
 					Danh sách này sẽ gồm thông báo bày tỏ cảm xúc của mọi người cho tin nhắn của
 					bạn.

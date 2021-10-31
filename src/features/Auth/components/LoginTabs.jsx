@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Tabs, Tab, Typography, Box } from '@mui/material';
-import { AppContext } from '../../../context/AppProvider';
+import { AppContext } from 'context/AppProvider';
 import LoginForm from './LoginForm';
 import LoginQrError from './LoginQrError';
 
@@ -36,6 +36,8 @@ export default function LoginTabs() {
 		setTimeout(() => {
 			setIsQrError(true);
 		}, 10000);
+
+		return clearTimeout()
 	}, []);
 
 	const handleChange = (event, newValue) => {

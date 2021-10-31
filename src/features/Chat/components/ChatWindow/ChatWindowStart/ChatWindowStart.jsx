@@ -5,7 +5,6 @@ import ChatWindowCarousel from './Carousel';
 export default function ChatWindowStart() {
 	return (
 		<div className="chat-window__start__wrapper">
-			<ChatWindowCarousel />
 			<div className="chat-window__start__container">
 				<div className="chat-window__start__header">
 					<Typography
@@ -21,6 +20,7 @@ export default function ChatWindowStart() {
 					</Typography>
 				</div>
 			</div>
+			<ChatWindowCarousel />
 		</div>
 	);
 }

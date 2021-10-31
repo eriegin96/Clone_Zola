@@ -1,6 +1,6 @@
 .chat-window__start__wrapper {
 	display: flex;
-	flex-flow: column-reverse;
+	flex-flow: column;
 	align-items: center;
 	text-align: center;
 	height: 100%;
@@ -71,18 +71,16 @@
 
 		.chat-window__chat__header__title {
 			display: flex;
-			justify-content: space-between;
 			align-items: center;
 			flex: 1;
 
-			img {
+			.MuiAvatar-root {
 				width: 48px;
 				height: 48px;
-				border-radius: 50%;
 				margin-right: 10px;
 			}
 
-			img + div {
+			.MuiAvatar-root + div {
 				flex: 1;
 
 				div {
@@ -235,6 +233,10 @@
 					}
 				}
 			}
+
+			.chat-window__chat__input__text-box:focus {
+				border-top: 1px solid #000;
+			}
 		}
 	}
 }
@@ -267,7 +269,7 @@
 
 	.chat-window__add__container {
 		height: calc(100vh - 69px);
-		padding: 0 41px;
+		padding: 0 10%;
 		background-color: #fafafc;
 		overflow: auto;
 

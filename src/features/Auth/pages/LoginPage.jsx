@@ -1,7 +1,7 @@
 import { Link, Typography } from '@mui/material';
 import React, { useContext } from 'react';
 import './loginPage.scss';
-import { AppContext } from '../../../context/AppProvider';
+import { AppContext } from 'context/AppProvider';
 import LoginTabs from '../components/LoginTabs';
 import '../components/loginComponents.scss';
 

@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Typography, Paper } from '@mui/material';
 import Carousel from 'react-material-ui-carousel';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import img1 from '../../../../resources/img/chat-window/chat-window-1.png';
-import img2 from '../../../../resources/img/chat-window/chat-window-2.png';
-import img3 from '../../../../resources/img/chat-window/chat-window-3.jpg';
-import img4 from '../../../../resources/img/chat-window/chat-window-4.jpg';
-import img5 from '../../../../resources/img/chat-window/chat-window-5.png';
-import img6 from '../../../../resources/img/chat-window/chat-window-6.jpg';
-import img7 from '../../../../resources/img/chat-window/chat-window-7.jpg';
+import img1 from 'resources/img/chat-window/chat-window-1.png';
+import img2 from 'resources/img/chat-window/chat-window-2.png';
+import img3 from 'resources/img/chat-window/chat-window-3.jpg';
+import img4 from 'resources/img/chat-window/chat-window-4.jpg';
+import img5 from 'resources/img/chat-window/chat-window-5.png';
+import img6 from 'resources/img/chat-window/chat-window-6.jpg';
+import img7 from 'resources/img/chat-window/chat-window-7.jpg';
 
 const items = [
 	{

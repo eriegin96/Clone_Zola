@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Avatar, Menu, MenuItem, Divider, Stack } from '@mui/material';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-import img from '../../../../resources/img/avatar-invite.png';
+import img from 'resources/img/avatar-invite.png';
 import InviteDialog from './Dialogs/InviteDialog/InviteDialog';
 
 export default function NavBarAvatar() {

@@ -19,8 +19,8 @@ import SettingsApplicationsOutlinedIcon from '@mui/icons-material/SettingsApplic
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import img from '../../../../../resources/img/conv-list/label.png';
-import { AppContext } from '../../../../../context/AppProvider';
+import img from 'resources/img/conv-list/label.png';
+import { AppContext } from 'context/AppProvider';
 import ChatMenu from './ChatMenu';
 
 const cates = [
@@ -58,7 +58,13 @@ const AccordionSummary = styled((props) => <MuiAccordionSummary {...props} />)((
 }));
 
 export default function ConvListChat() {
-	const { recentChatList, initialActiveChatWindow, setActiveChatWindow } = useContext(AppContext);
+	const {
+		contactList,
+		initialActiveChatWindow,
+		setActiveChatWindow,
+		rooms,
+		setSelectedRoomId,
+	} = useContext(AppContext);
 	const initialActiveCate = {
 		all: false,
 		client: false,
@@ -69,8 +75,8 @@ export default function ConvListChat() {
 	};
 	const [activeCate, setActiveCate] = useState({ ...initialActiveCate, all: true });
 	const [height, setHeight] = useState('48px');
-	const [anchorEl, setAnchorEl] = useState(() => Array(recentChatList.length).fill(null));
-	const [open, setOpen] = useState(() => Array(recentChatList.length).fill(false));
+	const [anchorEl, setAnchorEl] = useState(() => Array(rooms.length).fill(null));
+	const [open, setOpen] = useState(() => Array(rooms.length).fill(false));
 
 	const handleOpen = (event, i) => {
 		const newAnchorEl = [...anchorEl];
@@ -148,8 +154,8 @@ export default function ConvListChat() {
 						role="list"
 						className="conv-list__contact__list"
 					>
-						{recentChatList.map((value, i) => {
-							const labelId = `item-${value}-label`;
+						{rooms.map((room, i) => {
+							const labelId = `item-${i}-label`;
 							return (
 								<React.Fragment key={i}>
 									<ListItem
@@ -157,10 +163,8 @@ export default function ConvListChat() {
 										button
 										disableRipple
 										onClick={() => {
-											setActiveChatWindow({
-												...initialActiveChatWindow,
-												chat: true,
-											});
+											setSelectedRoomId(room.id);
+											setActiveChatWindow({...initialActiveChatWindow, chat: true})
 										}}
 										secondaryAction={
 											<IconButton
@@ -175,9 +179,23 @@ export default function ConvListChat() {
 										sx={{ padding: '10px 0 10px 10px', width: '100%' }}
 									>
 										<ListItemIcon>
-											<Avatar sx={{ width: '48px', height: '48px' }} />
+											<Avatar
+												sx={{ width: '48px', height: '48px' }}
+												src={
+													contactList.find((item) =>
+														room.members.includes(item.uid)
+													).photoURL
+												}
+											/>
 										</ListItemIcon>
-										<ListItemText id={labelId} primary={`Mới đây ${value}`} />
+										<ListItemText
+											id={labelId}
+											primary={
+												contactList.find((item) =>
+													room.members.includes(item.uid)
+												).displayName
+											}
+										/>
 									</ListItem>
 									<ChatMenu
 										anchorEl={anchorEl}

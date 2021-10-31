@@ -3,9 +3,9 @@ import { Avatar, Typography, Paper, Grid, Button, AvatarGroup } from '@mui/mater
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ImportExportIcon from '@mui/icons-material/ImportExport';
 import CloseIcon from '@mui/icons-material/Close';
-import imgAddFriend from '../../../../resources/img/add-friend.png';
-import imgAddGroup from '../../../../resources/img/add-group.png';
-import { AppContext } from '../../../../context/AppProvider';
+import imgAddFriend from 'resources/img/add-friend.png';
+import imgAddGroup from 'resources/img/add-group.png';
+import { AppContext } from 'context/AppProvider';
 
 export default function ChatWindowAdd({ addFriend }) {
 	const { suggestList, groupList } = useContext(AppContext);
@@ -40,10 +40,10 @@ export default function ChatWindowAdd({ addFriend }) {
 					<div className="chat-window__add__suggest-friend-list">
 						<Grid container spacing={2}>
 							{suggestList.map((item, i) => (
-								<Grid item key={i} xs={6}>
+								<Grid item key={i} xs={12} md={6}>
 									<Paper elevation={0} className="chat-window__add__suggest-item">
-										<Avatar sx={{ width: 96, height: 96 }} />
-										<div>Gợi ý {i}</div>
+										<Avatar sx={{ width: 96, height: 96 }} src={item.photoURL} />
+										<div>{item.displayName}</div>
 										<div>Từ số điện thoại</div>
 										<div>Chưa có nhóm chung</div>
 										<Button variant="outlined">KẾT BẠN</Button>
@@ -60,7 +60,7 @@ export default function ChatWindowAdd({ addFriend }) {
 					<div className="chat-window__add__group-list">
 						<Grid container spacing={2}>
 								{groupList.map((item, i) => (
-									<Grid item key={i} xs={6}>
+									<Grid item key={i} xs={12} md={6}>
 										<Paper
 											elevation={0}
 											className="chat-window__add__group-item"

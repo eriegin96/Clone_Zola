@@ -7,7 +7,6 @@ import '@fontsource/poppins';
 import { AuthContext } from './context/AuthProvider';
 import LoginPage from './features/Auth/pages/LoginPage';
 import ChatPage from './features/Chat/pages/ChatPage';
-import Auth from './components/Auth';
 
 const theme = createTheme({
 	palette: {
@@ -17,7 +16,7 @@ const theme = createTheme({
 		},
 		secondary: {
 			main: '#e5efff',
-      dark: '#abcdff',
+			dark: '#abcdff',
 		},
 		default: {
 			main: '#e8eaef',
@@ -27,24 +26,25 @@ const theme = createTheme({
 });
 
 function App() {
-	// const {
-	// 	user: { uid },
-	// } = useContext(AuthContext);
+	const {
+		user: { uid },
+	} = useContext(AuthContext);
 
 	return (
 		<React.Fragment>
 			<ThemeProvider theme={theme}>
-				{/* {uid ? (
-					<Switch> */}
-				<Route exact path="/" component={ChatPage} />
-				<Route path="/login" component={LoginPage} />
-				{/* </Switch>
+				{uid ? (
+					<Switch>
+						<Route exact path="/" component={ChatPage} />
+						<Route path="/login" component={LoginPage} />
+						<Redirect from="*" to="/" />
+					</Switch>
 				) : (
 					<Switch>
 						<Route exact path="/" component={LoginPage} />
 						<Redirect from="*" to="/" />
 					</Switch>
-				)} */}
+				)}
 			</ThemeProvider>
 		</React.Fragment>
 	);

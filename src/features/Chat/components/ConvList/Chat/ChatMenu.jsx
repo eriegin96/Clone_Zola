@@ -8,7 +8,7 @@ export default function ChatMenu(props) {
 	return (
 		<Menu
 			anchorEl={anchorEl[i]}
-			open={open[i]}
+			open={open[i] ?? false}
 			onClose={() => handleClose(i)}
 			onClick={() => handleClose(i)}
 			PaperProps={{

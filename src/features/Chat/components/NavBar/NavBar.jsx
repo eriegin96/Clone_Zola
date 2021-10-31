@@ -15,7 +15,7 @@ import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import NavBarAvatar from './NavBarAvatar';
 import NavBarSetting from './NavBarSetting';
-import { AppContext } from '../../../../context/AppProvider';
+import { AppContext } from 'context/AppProvider';
 
 export default function NavBar() {
 	const {

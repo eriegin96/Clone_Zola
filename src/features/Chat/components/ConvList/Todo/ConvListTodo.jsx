@@ -8,8 +8,8 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import CloseIcon from '@mui/icons-material/Close';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import { Input } from 'antd';
-import { AppContext } from '../../../../../context/AppProvider';
-import img from '../../../../../resources/img/conv-list/search.png'
+import { AppContext } from 'context/AppProvider';
+import img from 'resources/img/conv-list/search.png'
 import TodoTabs from './TodoTabs';
 
 function TabPanel(props) {

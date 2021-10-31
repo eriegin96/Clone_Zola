@@ -15,9 +15,9 @@ import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
-import { addUser } from '../../../firebase/services';
-import { auth } from '../../../firebase/config';
-import { AppContext } from '../../../context/AppProvider';
+import { addUser, createUsersData } from 'firebase/services';
+import { auth } from 'firebase/config';
+import { AppContext } from 'context/AppProvider';
 
 const facebookProvider = new FacebookAuthProvider();
 const googleProvider = new GoogleAuthProvider();
@@ -44,7 +44,10 @@ export default function LoginForm() {
 	const passwordRef = useRef(null);
 
 	const validationSchema = yup.object().shape({
-		email: yup.string().email(isVN ? 'Email không đúng' : 'Email is not valid').required(isVN ? 'Vui lòng nhập email' : 'Email is required'),
+		email: yup
+			.string()
+			.email(isVN ? 'Email không đúng' : 'Email is not valid')
+			.required(isVN ? 'Vui lòng nhập email' : 'Email is required'),
 		password: yup
 			.string()
 			.required(isVN ? 'Vui lòng nhập mật khẩu' : 'Password is required')
@@ -91,7 +94,7 @@ export default function LoginForm() {
 						password: passwordRef.current.value,
 					})
 					.catch((err) => {
-						setErrorMessage(err.message)
+						setErrorMessage(err.message);
 						console.log(err.message);
 					});
 			});
@@ -100,8 +103,8 @@ export default function LoginForm() {
 	const handleLogin = async (provider) => {
 		signInWithPopup(auth, provider)
 			.then((result) => {
-				const { additionalUserInfo, user } = result;
-				checkUserExist(additionalUserInfo, user);
+				const { _tokenResponse, user } = result;
+				checkUserExist(_tokenResponse, user);
 			})
 			.catch((error) => {
 				const pendingCred = error.credential;
@@ -184,7 +187,7 @@ export default function LoginForm() {
 								className="form__btn form__btn--google"
 							>
 								<GoogleIcon />
-								<span className="form__text">{isVN ? 'Google' : 'Google'}</span>
+								<span className="form__text">Google</span>
 							</Button>
 						</div>
 						<div className="form__item">
@@ -194,10 +197,20 @@ export default function LoginForm() {
 								className="form__btn form__btn--facebook"
 							>
 								<FacebookIcon />
-								<span className="form__text">{isVN ? 'Facebook' : 'Facebook'}</span>
+								<span className="form__text">Facebook</span>
 							</Button>
 						</div>
 					</Stack>
+					{/* Create fake data */}
+					<Button
+						variant="contained"
+						color="warning"
+						fullWidth
+						onClick={() => createUsersData()}
+					>
+						Create User Data
+					</Button>
+					{/*  */}
 					<Link underline="hover" className="form__forgot-password">
 						{isVN ? 'Quên mật khẩu?' : 'Forgot password?'}
 					</Link>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@mui/material';
 import { signOut } from 'firebase/auth';
-import { auth } from '../../../firebase/config';
+import { auth } from 'firebase/config';
 
 export default function LogoutDialog() {
 	const logout = () => {

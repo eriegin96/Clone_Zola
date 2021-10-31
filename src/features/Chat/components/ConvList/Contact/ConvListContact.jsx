@@ -14,15 +14,35 @@ import {
 } from '@mui/material';
 import PersonAddOutlinedIcon from '@mui/icons-material/PersonAddOutlined';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import imgAddFriend from '../../../../../resources/img/add-friend.png';
-import imgAddGroup from '../../../../../resources/img/add-group.png';
-import imgCloud from '../../../../../resources/img/cloud.jpg';
-import { AppContext } from '../../../../../context/AppProvider';
+import imgAddFriend from 'resources/img/add-friend.png';
+import imgAddGroup from 'resources/img/add-group.png';
+import imgCloud from 'resources/img/cloud.jpg';
+import { AppContext } from 'context/AppProvider';
+import { createRooms } from 'firebase/services';
+import { AuthContext } from 'context/AuthProvider';
 
 export default function ConvListContact() {
-	const { initialActiveChatWindow, setActiveChatWindow, contactList } = useContext(AppContext);
+	const { user } = useContext(AuthContext);
+	const {
+		initialActiveChatWindow,
+		activeChatWindow,
+		setActiveChatWindow,
+		contactList,
+		rooms,
+		selectedRoomId,
+		setSelectedRoomId,
+	} = useContext(AppContext);
 	const initialActiveBtn = { addFriend: false, addGroup: false, cloud: false };
 	const [activeBtn, setActiveBtn] = useState({ ...initialActiveBtn, addFriend: true });
+
+	const openChatBox = (i) => {
+		createRooms(user.uid, contactList[i].uid);
+		// setActiveChatWindow({...initialActiveChatWindow})
+		// activeChatWindow[contactList[i]] = true
+		// setActiveChatWindow(activeChatWindow)
+		const selected = rooms.find((room) => room.members.includes(contactList[i].uid));
+		setSelectedRoomId(selected);
+	};
 
 	return (
 		<div className="conv-list__contact">
@@ -102,20 +122,21 @@ export default function ConvListContact() {
 							role="list"
 							className="conv-list__contact__list"
 						>
-							{contactList.map((value) => {
-								const labelId = `item-${value}-label`;
+							{contactList.map((user, i) => {
+								const labelId = `item-${i}-label`;
 
 								return (
 									<ListItem
-										key={value}
+										key={i}
 										role="listitem"
 										button
 										sx={{ padding: '6px 0 6px 10px', width: '100%' }}
+										onClick={() => openChatBox(i)}
 									>
 										<ListItemIcon>
-											<Avatar />
+											<Avatar src={user.photoURL} />
 										</ListItemIcon>
-										<ListItemText id={labelId} primary={`Danh bạ ${value}`} />
+										<ListItemText id={labelId} primary={user.displayName} />
 									</ListItem>
 								);
 							})}
