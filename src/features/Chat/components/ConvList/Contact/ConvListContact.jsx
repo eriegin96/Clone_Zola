@@ -18,30 +18,18 @@ import imgAddFriend from 'resources/img/add-friend.png';
 import imgAddGroup from 'resources/img/add-group.png';
 import imgCloud from 'resources/img/cloud.jpg';
 import { AppContext } from 'context/AppProvider';
-import { createRooms } from 'firebase/services';
-import { AuthContext } from 'context/AuthProvider';
 
-export default function ConvListContact() {
-	const { user } = useContext(AuthContext);
-	const {
-		initialActiveChatWindow,
-		activeChatWindow,
-		setActiveChatWindow,
-		contactList,
-		rooms,
-		selectedRoomId,
-		setSelectedRoomId,
-	} = useContext(AppContext);
+export default function ConvListContact(props) {
+	const { contactList } = props;
+	const { initialActiveChatWindow, setActiveChatWindow, rooms, setSelectedRoomId } =
+		useContext(AppContext);
 	const initialActiveBtn = { addFriend: false, addGroup: false, cloud: false };
 	const [activeBtn, setActiveBtn] = useState({ ...initialActiveBtn, addFriend: true });
 
 	const openChatBox = (i) => {
-		createRooms(user.uid, contactList[i].uid);
-		// setActiveChatWindow({...initialActiveChatWindow})
-		// activeChatWindow[contactList[i]] = true
-		// setActiveChatWindow(activeChatWindow)
 		const selected = rooms.find((room) => room.members.includes(contactList[i].uid));
-		setSelectedRoomId(selected);
+		setSelectedRoomId(selected.id);
+		setActiveChatWindow({ ...initialActiveChatWindow, chat: true });
 	};
 
 	return (

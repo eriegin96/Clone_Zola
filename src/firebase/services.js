@@ -11,8 +11,9 @@ import {
 } from 'firebase/firestore';
 import { usersList } from 'resources/data/users-list';
 
+const start = Math.floor(Math.random() * 40);
 export const createUsersData = () => {
-	for (let i = 0; i < 10; i++) {
+	for (let i = start; i < start + 10; i++) {
 		const {
 			cell,
 			dob: { age, date },
@@ -81,21 +82,20 @@ export const addUser = (uid, data) => {
 	const userRef = doc(db, 'users', uid);
 
 	// create fake friend list
-	const start = Math.floor(Math.random() * 5);
-	const randomFriendsList = usersList.slice(start, start + 5);
-	const filteredList = [];
-	for (let i = 0; i < randomFriendsList.length; i++) {
-		const {
-			login: { uuid },
-		} = randomFriendsList[i];
-		filteredList.push(uuid);
-	}
+	// const randomFriendsList = usersList.slice(start, start + 5);
+	// const filteredList = [];
+	// for (let i = 0; i < randomFriendsList.length; i++) {
+	// 	const {
+	// 		login: { uuid },
+	// 	} = randomFriendsList[i];
+	// 	filteredList.push(uuid);
+	// }
 
 	async function asyncSetDoc() {
 		await setDoc(userRef, {
 			...data,
-			friends: filteredList,
-			// friends: [],
+			// friends: filteredList,
+			friends: [],
 			createdAt: serverTimestamp(),
 		});
 	}
@@ -103,8 +103,34 @@ export const addUser = (uid, data) => {
 	asyncSetDoc();
 };
 
+export const addFriend = (uid, friendId) => {
+	const userRef = doc(db, 'users', uid, 'friends', friendId);
+	const friendRef = doc(db, 'users', friendId);
+
+	async function asyncAddRoom() {
+		// const userSnap = await getDoc(userRef);
+		// const data = userSnap.data();
+		// const newFriends = [...data.friends, friendId];
+
+		// await updateDoc(userRef, {
+		// 	friends: newFriends,
+		// });
+		const friendSnap = await getDoc(friendRef);
+		const { photoURL, displayName, cell = null } = friendSnap.data();
+		await setDoc(userRef, {
+			uid: friendId,
+			photoURL,
+			displayName,
+			cell,
+			createdAt: serverTimestamp(),
+		});
+	}
+
+	asyncAddRoom();
+};
+
 export const addRoom = (data) => {
-	const roomRef = doc(db, 'rooms');
+	const roomRef = collection(db, 'rooms');
 
 	async function asyncAddRoom() {
 		await addDoc(roomRef, {
@@ -114,4 +140,17 @@ export const addRoom = (data) => {
 	}
 
 	asyncAddRoom();
+};
+
+export const addMessage = (uid, data) => {
+	const messageRef = collection(db, 'rooms', uid, 'messages');
+
+	async function asyncAddMessage() {
+		await addDoc(messageRef, {
+			...data,
+			createdAt: serverTimestamp(),
+		});
+	}
+
+	asyncAddMessage();
 };

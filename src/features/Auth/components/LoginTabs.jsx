@@ -33,11 +33,11 @@ export default function LoginTabs() {
 	const [isQrError, setIsQrError] = useState(false);
 
 	useEffect(() => {
-		setTimeout(() => {
+		const time = setTimeout(() => {
 			setIsQrError(true);
 		}, 10000);
 
-		return clearTimeout()
+		return clearTimeout(time);
 	}, []);
 
 	const handleChange = (event, newValue) => {

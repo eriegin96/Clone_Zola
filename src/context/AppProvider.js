@@ -1,5 +1,12 @@
 import { createRooms } from 'firebase/services';
-import { useFirestore, useFirestoreObject } from 'hooks/useFirestore';
+import {
+	useFirestore,
+	useFirestoreContactList,
+	useFirestoreMessages,
+	useFirestoreObject,
+	useFirestoreRecentList,
+	useFirestoreSuggestList,
+} from 'hooks/useFirestore';
 import React, { createContext, useContext, useMemo, useState } from 'react';
 import { AuthContext } from './AuthProvider';
 
@@ -9,6 +16,7 @@ export default function AppProvider({ children }) {
 	const { user } = useContext(AuthContext);
 	const [isVN, setIsVN] = useState(true);
 	const [selectedRoomId, setSelectedRoomId] = useState('');
+	const [messages, setMessages] = useState([]);
 
 	// Navbar Tab Selection
 	const initialActiveTab = {
@@ -35,27 +43,14 @@ export default function AppProvider({ children }) {
 
 	// Conversation Selection
 	const initialActiveConversation = {
-		user: false,
 		cloud: false,
 		zalopay: false,
 		gamecenter: false,
 	};
 	const [activeConversation, setActiveConversation] = useState({
-		...initialActiveConversation,
+		...initialActiveConversation,             
 		cloud: true,
 	});
-
-	// ChatWindowAdd Suggest List + Group List
-	const suggestCondition = useMemo(() => {
-		if (user.friends) {
-			return {
-				fieldName: 'uid',
-				operator: 'not-in',
-				compareValue: [...user.friends, user.uid],
-			};
-		}
-	}, [user]);
-	const suggestList = useFirestore('users', suggestCondition);
 
 	const groupList = useMemo(() => {
 		const arr = [];
@@ -64,15 +59,6 @@ export default function AppProvider({ children }) {
 		}
 		return arr;
 	}, []);
-
-	const contactCondition = useMemo(() => {
-		return {
-			fieldName: 'uid',
-			operator: 'in',
-			compareValue: user.friends,
-		};
-	}, [user]);
-	const contactList = useFirestore('users', contactCondition);
 
 	// Room
 	const roomsCondition = useMemo(() => {
@@ -97,9 +83,8 @@ export default function AppProvider({ children }) {
 			fieldName: 'uid',
 			operator: 'in',
 			compareValue: newArr,
-			// compareValue: selectedRoom.members,
 		};
-	}, [selectedRoom.members]);
+	}, [selectedRoom]);
 	const members = useFirestoreObject('users', membersCondition);
 
 	return (
@@ -116,14 +101,14 @@ export default function AppProvider({ children }) {
 				initialActiveConversation,
 				activeConversation,
 				setActiveConversation,
-				contactList,
-				suggestList,
 				groupList,
 				rooms,
+				members,
 				selectedRoom,
 				selectedRoomId,
 				setSelectedRoomId,
-				members,
+				messages,
+				setMessages,
 			}}
 		>
 			{children}

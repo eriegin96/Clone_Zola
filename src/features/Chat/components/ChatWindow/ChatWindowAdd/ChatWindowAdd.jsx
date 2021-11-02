@@ -6,12 +6,20 @@ import CloseIcon from '@mui/icons-material/Close';
 import imgAddFriend from 'resources/img/add-friend.png';
 import imgAddGroup from 'resources/img/add-group.png';
 import { AppContext } from 'context/AppProvider';
+import { AuthContext } from 'context/AuthProvider';
+import { addFriend as addToContact, createRooms } from 'firebase/services';
 
-export default function ChatWindowAdd({ addFriend }) {
-	const { suggestList, groupList } = useContext(AppContext);
+export default function ChatWindowAdd({ addFriend, suggestList }) {
+	const { user } = useContext(AuthContext);
+	const { groupList } = useContext(AppContext);
 
 	const handleCloseSuggest = (i) => {
 		console.log(i);
+	};
+
+	const handleClick = (i) => {
+		addToContact(user.uid, suggestList[i].uid);
+		createRooms(user.uid, suggestList[i].uid);
 	};
 
 	return (
@@ -42,11 +50,16 @@ export default function ChatWindowAdd({ addFriend }) {
 							{suggestList.map((item, i) => (
 								<Grid item key={i} xs={12} md={6}>
 									<Paper elevation={0} className="chat-window__add__suggest-item">
-										<Avatar sx={{ width: 96, height: 96 }} src={item.photoURL} />
+										<Avatar
+											sx={{ width: 96, height: 96 }}
+											src={item.photoURL}
+										/>
 										<div>{item.displayName}</div>
 										<div>Từ số điện thoại</div>
 										<div>Chưa có nhóm chung</div>
-										<Button variant="outlined">KẾT BẠN</Button>
+										<Button variant="outlined" onClick={() => handleClick(i)}>
+											KẾT BẠN
+										</Button>
 										<CloseIcon
 											className="chat-window__add__close-suggest"
 											onClick={(i) => handleCloseSuggest(i)}
@@ -59,24 +72,21 @@ export default function ChatWindowAdd({ addFriend }) {
 				) : (
 					<div className="chat-window__add__group-list">
 						<Grid container spacing={2}>
-								{groupList.map((item, i) => (
-									<Grid item key={i} xs={12} md={6}>
-										<Paper
-											elevation={0}
-											className="chat-window__add__group-item"
-										>
-											<AvatarGroup max={4}>
-												<Avatar />
-												<Avatar />
-												<Avatar />
-												<Avatar />
-												<Avatar />
-											</AvatarGroup>
-											<div>Nhóm {i}</div>
-											<div>5 thành viên</div>
-										</Paper>
-									</Grid>
-								))}
+							{groupList.map((item, i) => (
+								<Grid item key={i} xs={12} md={6}>
+									<Paper elevation={0} className="chat-window__add__group-item">
+										<AvatarGroup max={4}>
+											<Avatar />
+											<Avatar />
+											<Avatar />
+											<Avatar />
+											<Avatar />
+										</AvatarGroup>
+										<div>Nhóm {i}</div>
+										<div>5 thành viên</div>
+									</Paper>
+								</Grid>
+							))}
 						</Grid>
 					</div>
 				)}

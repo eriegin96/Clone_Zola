@@ -9,7 +9,7 @@ import imgCloud from 'resources/img/cloud.jpg';
 import { AppContext } from 'context/AppProvider';
 
 export default function WindowChatHeader() {
-	const { activeConversation, members } = useContext(AppContext);
+	const { members } = useContext(AppContext);
 
 	return (
 		<div className="chat-window__chat__header">

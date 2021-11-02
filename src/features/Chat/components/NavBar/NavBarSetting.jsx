@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Avatar, Menu, MenuItem, Divider, Stack, Tooltip, Button } from '@mui/material';
+import { Menu, MenuItem, Divider, Tooltip } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
@@ -7,19 +7,21 @@ import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
+import LogoutDialog from './Dialogs/LogoutDialog';
 
 export default function NavBarSetting(props) {
 	const { activeTab, setActiveTab } = props;
+	const [openLogoutDialog, setOpenLogoutDialog] = useState(false);
 	const [anchorEl, setAnchorEl] = useState(null);
 	const open = Boolean(anchorEl);
 
 	const handleClick = (event) => {
-		setActiveTab({...activeTab, setting: true });
+		setActiveTab({ ...activeTab, setting: true });
 		setAnchorEl(event.currentTarget);
 	};
 
 	const handleClose = () => {
-		setActiveTab({...activeTab, setting: false });
+		setActiveTab({ ...activeTab, setting: false });
 		setAnchorEl(null);
 	};
 
@@ -93,10 +95,11 @@ export default function NavBarSetting(props) {
 					/>
 				</MenuItem>
 				<Divider variant="middle" sx={{ margin: '4px 16px !important' }} />
-				<MenuItem className="navbar__setting__menu__item">
+				<MenuItem className="navbar__setting__menu__item" onClick={() => {setOpenLogoutDialog(true)}}>
 					<div className="navbar__setting__logout">Đăng xuất</div>
 				</MenuItem>
 			</Menu>
+			<LogoutDialog open={openLogoutDialog} setOpen={setOpenLogoutDialog} />
 		</>
 	);
 }

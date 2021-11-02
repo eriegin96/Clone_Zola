@@ -5,8 +5,7 @@ import WindowChatInput from './WindowChatInput';
 import { AppContext } from 'context/AppProvider';
 
 export default function ChatWindowChat() {
-	const { selectedRoom } =
-		useContext(AppContext);
+	const { selectedRoom } = useContext(AppContext);
 
 	return (
 		<>

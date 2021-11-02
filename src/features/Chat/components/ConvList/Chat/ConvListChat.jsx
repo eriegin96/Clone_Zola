@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import {
 	Chip,
 	Divider,
@@ -22,6 +22,8 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import img from 'resources/img/conv-list/label.png';
 import { AppContext } from 'context/AppProvider';
 import ChatMenu from './ChatMenu';
+import { useFirestore, useFirestoreRecentList } from 'hooks/useFirestore';
+import { AuthContext } from 'context/AuthProvider';
 
 const cates = [
 	{
@@ -57,13 +59,15 @@ const AccordionSummary = styled((props) => <MuiAccordionSummary {...props} />)((
 	},
 }));
 
-export default function ConvListChat() {
+export default function ConvListChat(props) {
+	const { user } = useContext(AuthContext);
 	const {
-		contactList,
 		initialActiveChatWindow,
 		setActiveChatWindow,
 		rooms,
+		selectedRoomId,
 		setSelectedRoomId,
+		setMessages,
 	} = useContext(AppContext);
 	const initialActiveCate = {
 		all: false,
@@ -77,6 +81,16 @@ export default function ConvListChat() {
 	const [height, setHeight] = useState('48px');
 	const [anchorEl, setAnchorEl] = useState(() => Array(rooms.length).fill(null));
 	const [open, setOpen] = useState(() => Array(rooms.length).fill(false));
+
+	const recentCompareValue = useFirestoreRecentList(user.uid);
+	const recentCondition = useMemo(() => {
+		return {
+			fieldName: 'uid',
+			operator: 'in',
+			compareValue: recentCompareValue,
+		};
+	}, [recentCompareValue]);
+	const recentList = useFirestore('users', recentCondition);
 
 	const handleOpen = (event, i) => {
 		const newAnchorEl = [...anchorEl];
@@ -163,8 +177,15 @@ export default function ConvListChat() {
 										button
 										disableRipple
 										onClick={() => {
+											setMessages((prevState) => {
+												if (selectedRoomId !== room.id) return [];
+												return prevState;
+											});
 											setSelectedRoomId(room.id);
-											setActiveChatWindow({...initialActiveChatWindow, chat: true})
+											setActiveChatWindow({
+												...initialActiveChatWindow,
+												chat: true,
+											});
 										}}
 										secondaryAction={
 											<IconButton
@@ -182,18 +203,18 @@ export default function ConvListChat() {
 											<Avatar
 												sx={{ width: '48px', height: '48px' }}
 												src={
-													contactList.find((item) =>
+													recentList.find((item) =>
 														room.members.includes(item.uid)
-													).photoURL
+													)?.photoURL
 												}
 											/>
 										</ListItemIcon>
 										<ListItemText
 											id={labelId}
 											primary={
-												contactList.find((item) =>
+												recentList.find((item) =>
 													room.members.includes(item.uid)
-												).displayName
+												)?.displayName
 											}
 										/>
 									</ListItem>

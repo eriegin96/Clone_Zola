@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Typography, Paper } from '@mui/material';
 import Carousel from 'react-material-ui-carousel';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -71,6 +71,7 @@ function Item({ item }) {
 export default function ChatWindowCarousel() {
 	return (
 		<Carousel
+			autoPlay
 			animation="slide"
 			NextIcon={<ChevronRightIcon />}
 			PrevIcon={<ChevronLeftIcon />}
