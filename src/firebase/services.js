@@ -96,7 +96,8 @@ export const updateUser = (uid, data) => {
 
 	async function asyncUpdateDoc() {
 		await updateDoc(userRef, {
-			...data
+			...data,
+			modifiedAt: serverTimestamp(),
 		});
 	}
 
@@ -141,6 +142,7 @@ export const addRoom = (data) => {
 		await addDoc(roomRef, {
 			...data,
 			createdAt: serverTimestamp(),
+			modifiedAt: serverTimestamp(),
 		});
 	}
 
@@ -149,11 +151,16 @@ export const addRoom = (data) => {
 
 export const addMessage = (uid, data) => {
 	const messageRef = collection(db, 'rooms', uid, 'messages');
+	const roomRef = doc(db, 'rooms', uid);
 
 	async function asyncAddMessage() {
 		await addDoc(messageRef, {
 			...data,
 			createdAt: serverTimestamp(),
+		});
+
+		await updateDoc(roomRef, {
+			modifiedAt: serverTimestamp(),
 		});
 	}
 

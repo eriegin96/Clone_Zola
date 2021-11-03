@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Tabs, Tab, Typography, Box } from '@mui/material';
 import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
-import img from 'resources/img/conv-list/noti.png';
+import img from 'resources/img/board/noti.png';
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -26,7 +26,7 @@ function tabProps(index) {
 	};
 }
 
-export default function ConvListNoti() {
+export default function BoardNoti() {
 	const [value, setValue] = useState(0);
 
 	const handleChange = (event, newValue) => {
@@ -34,8 +34,8 @@ export default function ConvListNoti() {
 	};
 
 	return (
-		<Box className="conv-list__noti">
-			<Typography variant="h5" component="div" className="conv-list__noti__title">
+		<Box className="board__noti">
+			<Typography variant="h5" component="div" className="board__noti__title">
 				Thông báo
 			</Typography>
 			<Tabs
@@ -44,24 +44,24 @@ export default function ConvListNoti() {
 				aria-label="noti tabs"
 				variant="fullWidth"
 				TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
-				className="conv-list__noti__tabs"
+				className="board__noti__tabs"
 			>
-				<Tab label="Ưu tiên" {...tabProps(0)} className="conv-list__noti__tab" />
-				<Tab label="Khác" {...tabProps(1)} className="conv-list__noti__tab" />
-				<Tab disabled className="conv-list__noti__tab" />
-				<Tab disabled className="conv-list__noti__tab" />
+				<Tab label="Ưu tiên" {...tabProps(0)} className="board__noti__tab" />
+				<Tab label="Khác" {...tabProps(1)} className="board__noti__tab" />
+				<Tab disabled className="board__noti__tab" />
+				<Tab disabled className="board__noti__tab" />
 			</Tabs>
-			<div className="conv-list__noti__select">
+			<div className="board__noti__select">
 				<span>Tất cả</span>
 				<ArrowDropDownOutlinedIcon />
 			</div>
-			<TabPanel value={value} index={0} className="conv-list__noti__tab-panel">
+			<TabPanel value={value} index={0} className="board__noti__tab-panel">
 				<img src={img} alt="noti" />
 				<Typography variant="body2" component="div">
 					Danh sách bạn chọn đang trống.
 				</Typography>
 			</TabPanel>
-			<TabPanel value={value} index={1} className="conv-list__noti__tab-panel">
+			<TabPanel value={value} index={1} className="board__noti__tab-panel">
 				<img src={img} alt="noti" />
 				<Typography variant="body2" component="div">
 					Danh sách này sẽ gồm thông báo bày tỏ cảm xúc của mọi người cho tin nhắn của

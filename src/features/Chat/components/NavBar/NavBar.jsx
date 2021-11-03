@@ -19,11 +19,9 @@ import { AppContext } from 'context/AppProvider';
 
 export default function NavBar() {
 	const {
-		initialActiveTab,
 		activeTab,
 		setActiveTab,
-		initialActiveChatWindow,
-		setActiveChatWindow,
+		setActiveWindow,
 	} = useContext(AppContext);
 
 	return (
@@ -32,14 +30,13 @@ export default function NavBar() {
 				<NavBarAvatar />
 				<button
 					title="Tin nhắn"
-					className={activeTab.chat ? 'navbar__btn--active' : 'navbar__btn'}
+					className={activeTab === 'chat' ? 'navbar__btn--active' : 'navbar__btn'}
 					onClick={() => {
-						setActiveTab({ ...initialActiveTab, chat: true });
-						setActiveChatWindow({ ...initialActiveChatWindow, chat: true });
-
+						setActiveTab('chat');
+						setActiveWindow('chat');
 					}}
 				>
-					{activeTab.chat ? (
+					{activeTab === 'chat' ? (
 						<ChatIcon sx={{ fontSize: '30px' }} />
 					) : (
 						<ChatOutlinedIcon sx={{ fontSize: '30px' }} />
@@ -47,13 +44,13 @@ export default function NavBar() {
 				</button>
 				<button
 					title="Danh bạ"
-					className={activeTab.contact ? 'navbar__btn--active' : 'navbar__btn'}
+					className={activeTab === 'contact' ? 'navbar__btn--active' : 'navbar__btn'}
 					onClick={() => {
-						setActiveTab({ ...initialActiveTab, contact: true });
-						setActiveChatWindow({ ...initialActiveChatWindow, addFriend: true });
+						setActiveTab('contact');
+						setActiveWindow('addFriend');
 					}}
 				>
-					{activeTab.contact ? (
+					{activeTab === 'contact' ? (
 						<ContactsIcon sx={{ fontSize: '30px' }} />
 					) : (
 						<ContactsOutlinedIcon sx={{ fontSize: '30px' }} />
@@ -61,12 +58,12 @@ export default function NavBar() {
 				</button>
 				<button
 					title="Thông báo"
-					className={activeTab.noti ? 'navbar__btn--active' : 'navbar__btn'}
+					className={activeTab === 'noti' ? 'navbar__btn--active' : 'navbar__btn'}
 					onClick={() => {
-						setActiveTab({ ...initialActiveTab, noti: true });
+						setActiveTab('noti');
 					}}
 				>
-					{activeTab.noti ? (
+					{activeTab === 'noti' ? (
 						<NotificationsIcon sx={{ fontSize: '30px' }} />
 					) : (
 						<NotificationsNoneIcon sx={{ fontSize: '30px' }} />
@@ -74,12 +71,12 @@ export default function NavBar() {
 				</button>
 				<button
 					title="To-Do"
-					className={activeTab.todo ? 'navbar__btn--active' : 'navbar__btn'}
+					className={activeTab === 'todo' ? 'navbar__btn--active' : 'navbar__btn'}
 					onClick={() => {
-						setActiveTab({ ...initialActiveTab, todo: true });
+						setActiveTab('todo');
 					}}
 				>
-					{activeTab.todo ? (
+					{activeTab === 'todo' ? (
 						<CheckBoxIcon sx={{ fontSize: '30px' }} />
 					) : (
 						<CheckBoxOutlinedIcon sx={{ fontSize: '30px' }} />
@@ -88,31 +85,28 @@ export default function NavBar() {
 				<Box sx={{ flexGrow: 1 }} />
 				<button
 					title="Cloud của tôi"
-					className={activeTab.cloud ? 'navbar__btn--active' : 'navbar__btn'}
+					className={activeTab === 'cloud' ? 'navbar__btn--active' : 'navbar__btn'}
 					onClick={() => {
-						setActiveTab({ ...initialActiveTab, chat: true });
-						setActiveChatWindow({ ...initialActiveChatWindow, chat: true });
+						setActiveTab('chat');
+						setActiveWindow('chat');
 					}}
 				>
 					<CloudQueueIcon sx={{ fontSize: '30px' }} />
 				</button>
 				<button
 					title="Đánh dấu"
-					className={activeTab.star ? 'navbar__btn--active' : 'navbar__btn'}
+					className={activeTab  === 'star' ? 'navbar__btn--active' : 'navbar__btn'}
 					onClick={() => {
-						setActiveTab({ ...initialActiveTab, star: true });
+						setActiveTab('star');
 					}}
 				>
-					{activeTab.star ? (
+					{activeTab === 'star' ? (
 						<StarIcon sx={{ fontSize: '30px' }} />
 					) : (
 						<StarBorderIcon sx={{ fontSize: '30px' }} />
 					)}
 				</button>
 				<NavBarSetting
-					initialActiveTab={initialActiveTab}
-					activeTab={activeTab}
-					setActiveTab={setActiveTab}
 				/>
 			</Stack>
 		</React.Fragment>

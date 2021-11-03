@@ -19,12 +19,11 @@ import imgAddGroup from 'resources/img/add-group.png';
 import imgCloud from 'resources/img/cloud.jpg';
 import { AppContext } from 'context/AppProvider';
 
-export default function ConvListContact(props) {
+export default function BoardContact(props) {
 	const { contactList } = props;
-	const { initialActiveChatWindow, setActiveChatWindow, rooms, selectedRoomId, setSelectedRoomId, setMessages } =
+	const { setActiveWindow, rooms, selectedRoomId, setSelectedRoomId, setMessages } =
 		useContext(AppContext);
-	const initialActiveBtn = { addFriend: false, addGroup: false, cloud: false };
-	const [activeBtn, setActiveBtn] = useState({ ...initialActiveBtn, addFriend: true });
+	const [activeBtn, setActiveBtn] = useState('addFriend');
 
 	const openChatBox = (i) => {
 		const selected = rooms.find((room) => room.members.includes(contactList[i].uid));
@@ -33,12 +32,12 @@ export default function ConvListContact(props) {
 			return prevState;
 		});
 		setSelectedRoomId(selected.id);
-		setActiveChatWindow({ ...initialActiveChatWindow, chat: true });
+		setActiveWindow('chat');
 	};
 
 	return (
-		<div className="conv-list__contact">
-			<div className="conv-list__contact__add">
+		<div className="board__contact">
+			<div className="board__contact__add">
 				<Button
 					variant="text"
 					disableRipple
@@ -52,13 +51,13 @@ export default function ConvListContact(props) {
 					disableRipple
 					fullWidth
 					onClick={() => {
-						setActiveChatWindow({ ...initialActiveChatWindow, addFriend: true });
-						setActiveBtn({ ...initialActiveBtn, addFriend: true });
+						setActiveWindow('addFriend');
+						setActiveBtn('addFriend');
 					}}
-					className={activeBtn.addFriend && 'conv-list__contact__add__btn--active'}
+					className={activeBtn === 'addFriend' && 'board__contact__add__btn--active'}
 				>
 					<img src={imgAddFriend} alt="add friend" />
-					<div className="conv-list__contact__add__badge"></div>
+					<div className="board__contact__add__badge"></div>
 					Danh sách kết bạn
 				</Button>
 				<Button
@@ -66,13 +65,13 @@ export default function ConvListContact(props) {
 					disableRipple
 					fullWidth
 					onClick={() => {
-						setActiveChatWindow({ ...initialActiveChatWindow, addGroup: true });
-						setActiveBtn({ ...initialActiveBtn, addGroup: true });
+						setActiveWindow('addGroup');
+						setActiveBtn('addGroup');
 					}}
-					className={activeBtn.addGroup && 'conv-list__contact__add__btn--active'}
+					className={activeBtn === 'addGroup' && 'board__contact__add__btn--active'}
 				>
 					<img src={imgAddGroup} alt="add group" />
-					<div className="conv-list__contact__add__badge"></div>
+					<div className="board__contact__add__badge"></div>
 					Danh sách nhóm
 				</Button>
 				<Divider sx={{ marginBottom: '8px' }} />
@@ -82,16 +81,16 @@ export default function ConvListContact(props) {
 					disableRipple
 					fullWidth
 					onClick={() => {
-						setActiveBtn({ ...initialActiveBtn, cloud: true });
+						setActiveBtn('cloud');
 					}}
-					className={activeBtn.cloud && 'conv-list__contact__add__btn--active'}
+					className={activeBtn === 'cloud' && 'board__contact__add__btn--active'}
 				>
 					<img src={imgCloud} alt="cloud" />
 					Cloud của tôi
 				</Button>
 			</div>
 			<Divider />
-			<div className="conv-list__contact__list-box">
+			<div className="board__contact__list-box">
 				<Accordion disableGutters>
 					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
@@ -112,7 +111,7 @@ export default function ConvListContact(props) {
 							dense
 							component="div"
 							role="list"
-							className="conv-list__contact__list"
+							className="board__contact__list"
 						>
 							{contactList.map((user, i) => {
 								const labelId = `item-${i}-label`;

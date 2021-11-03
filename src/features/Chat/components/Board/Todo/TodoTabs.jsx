@@ -11,7 +11,7 @@ function TabPanel(props) {
 			hidden={value !== index}
 			id={`tabpanel-${index}`}
 			aria-labelledby={`tab-${index}`}
-			className="conv-list__todo__sub-tab-panel"
+			className="board__todo__sub-tab-panel"
 			{...other}
 		>
 			{value === index && <>{children}</>}
@@ -37,7 +37,7 @@ export default function TodoTabs() {
 	};
 
 	return (
-		<div className="conv-list__todo__sub__wrapper">
+		<div className="board__todo__sub__wrapper">
 			<Box>
 				<Tabs
 					value={value}
@@ -45,13 +45,13 @@ export default function TodoTabs() {
 					aria-label="todo tabs"
 					variant="fullWidth"
 				>
-					<Tab label="TÔI GIAO" {...tabProps(0)} className="conv-list__todo__sub-tab" />
-					<Tab label="CẦN LÀM" {...tabProps(1)} className="conv-list__todo__sub-tab" />
-					<Tab label="THEO DÕI" {...tabProps(2)} className="conv-list__todo__sub-tab" />
+					<Tab label="TÔI GIAO" {...tabProps(0)} className="board__todo__sub-tab" />
+					<Tab label="CẦN LÀM" {...tabProps(1)} className="board__todo__sub-tab" />
+					<Tab label="THEO DÕI" {...tabProps(2)} className="board__todo__sub-tab" />
 				</Tabs>
 			</Box>
 			<TabPanel value={value} index={0}>
-				<div className="conv-list__todo__sub-tab-panel__tab">
+				<div className="board__todo__sub-tab-panel__tab">
 					<Chip
 						label="Chưa xong: 0"
 						size="small"
@@ -68,8 +68,8 @@ export default function TodoTabs() {
 					/>
 					<Chip label="Khác" size="small" color="default" sx={{ padding: '0 3px', fontSize: '12px' }} />
 				</div>
-				<div className="conv-list__todo__sub-tab-panel__job">
-					<div className="conv-list__todo__sub-tab-panel__text">
+				<div className="board__todo__sub-tab-panel__job">
+					<div className="board__todo__sub-tab-panel__text">
 						{giveDone
 							? 'Danh sách này sẽ gồm các công việc bạn giao cho người khác mà họ chưa hoàn	thành.'
 							: 'Danh sách này sẽ gồm các công việc bạn giao cho người khác mà họ đã hoàn thành.'}
@@ -79,7 +79,7 @@ export default function TodoTabs() {
 				</div>
 			</TabPanel>
 			<TabPanel value={value} index={1}>
-				<div className="conv-list__todo__sub-tab-panel__tab">
+				<div className="board__todo__sub-tab-panel__tab">
 					<Chip
 						label="Chưa xong: 0"
 						size="small"
@@ -96,8 +96,8 @@ export default function TodoTabs() {
 					/>
 					<Chip label="Khác" size="small" color="default" sx={{ padding: '0 3px', fontSize: '12px' }} />
 				</div>
-				<div className="conv-list__todo__sub-tab-panel__job">
-					<div className="conv-list__todo__sub-tab-panel__text">
+				<div className="board__todo__sub-tab-panel__job">
+					<div className="board__todo__sub-tab-panel__text">
 						{receiveDone
 							? 'Danh sách này sẽ gồm các công việc giao cho bạn mà bạn chưa hoàn thành.'
 							: 'Danh sách này sẽ gồm các công việc giao cho bạn mà bạn đã hoàn thành.'}
@@ -107,7 +107,7 @@ export default function TodoTabs() {
 				</div>
 			</TabPanel>
 			<TabPanel value={value} index={2}>
-				<div className="conv-list__todo__sub-tab-panel__tab">
+				<div className="board__todo__sub-tab-panel__tab">
 					<Chip
 						label="Chưa xong: 0"
 						size="small"
@@ -124,8 +124,8 @@ export default function TodoTabs() {
 					/>
 					<Chip label="Khác" size="small" color="default" sx={{ padding: '0 3px', fontSize: '12px' }} />
 				</div>
-				<div className="conv-list__todo__sub-tab-panel__job">
-					<div className="conv-list__todo__sub-tab-panel__text">
+				<div className="board__todo__sub-tab-panel__job">
+					<div className="board__todo__sub-tab-panel__text">
 						Danh sách này sẽ gồm các công việc giao cho thành viên nhóm bạn mà họ chưa
 						hoàn thành, bạn trong danh sách theo dõi.
 					</div>

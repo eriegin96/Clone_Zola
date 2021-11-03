@@ -1,4 +1,4 @@
-$convList-width: 300px;
+$board-width: 300px;
 
 .chat-page {
 	display: flex;
@@ -7,12 +7,12 @@ $convList-width: 300px;
 
 	.sidebar {
 		position: relative;
-		min-width: calc($convList-width + 64px);
-		max-width: calc($convList-width + 50px + 64px);
+		min-width: calc($board-width + 64px);
+		max-width: calc($board-width + 50px + 64px);
 		display: flex;
 
-		.conv-list {
-			width: $convList-width;
+		.board {
+			width: $board-width;
 			height: 100%;
 			border-right: 1px solid #e1e4ea;
 		}

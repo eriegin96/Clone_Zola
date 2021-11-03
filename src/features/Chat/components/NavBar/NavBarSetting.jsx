@@ -10,20 +10,20 @@ import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
 import LogoutDialog from './Dialogs/LogoutDialog/LogoutDialog';
 import AccountDialog from './Dialogs/AccountDialog/AccountDialog';
 
-export default function NavBarSetting(props) {
-	const { activeTab, setActiveTab } = props;
+export default function NavBarSetting() {
+	const [isActive, setIsActive] = useState(false);
 	const [openAccountDialog, setOpenAccountDialog] = useState(false);
 	const [openLogoutDialog, setOpenLogoutDialog] = useState(false);
 	const [anchorEl, setAnchorEl] = useState(null);
 	const open = Boolean(anchorEl);
 
 	const handleClick = (event) => {
-		setActiveTab({ ...activeTab, setting: true });
+		setIsActive(true);
 		setAnchorEl(event.currentTarget);
 	};
 
 	const handleClose = () => {
-		setActiveTab({ ...activeTab, setting: false });
+		setIsActive(false);
 		setAnchorEl(null);
 	};
 
@@ -31,10 +31,10 @@ export default function NavBarSetting(props) {
 		<>
 			<button
 				title="Cài đặt"
-				className={activeTab.setting ? 'navbar__btn--active' : 'navbar__btn'}
+				className={isActive ? 'navbar__btn--active' : 'navbar__btn'}
 				onClick={handleClick}
 			>
-				{activeTab.setting ? (
+				{isActive ? (
 					<SettingsIcon sx={{ fontSize: '30px' }} />
 				) : (
 					<SettingsOutlinedIcon sx={{ fontSize: '30px' }} />

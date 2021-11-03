@@ -1,12 +1,12 @@
 import React from 'react'
 import NavBar from './NavBar/NavBar'
-import ConvList from './ConvList/ConvList'
+import Board from './Board/Board'
 
 export default function SidebarNav() {
   return (
     <nav className='sidebar'>
       <NavBar/>
-      <ConvList />
+      <Board />
     </nav>
   )
 }

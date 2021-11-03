@@ -1,12 +1,12 @@
-.conv-list {
+.board {
 	height: 100%;
 	overflow: hidden;
 	background-color: #fff;
 
-	.conv-list__search__box {
+	.board__search__box {
 		padding: 20px 4px 10px 10px;
 
-		.conv-list__search__input {
+		.board__search__input {
 			width: 198px;
 			margin-right: 8px;
 			border-radius: 20px;
@@ -32,8 +32,8 @@
 		}
 	}
 
-	.conv-list__chat {
-		.conv-list__chat__category {
+	.board__chat {
+		.board__chat__category {
 			.MuiAccordion-root {
 				box-shadow: none;
 
@@ -62,8 +62,8 @@
 			}
 		}
 
-		.conv-list__chat__list {
-			.conv-list__chat__list-header {
+		.board__chat__list {
+			.board__chat__list-header {
 				margin: 0 12px;
 				padding: 12px 0 8px 0;
 				display: flex;
@@ -87,7 +87,7 @@
 				overflow: auto;
 			}
 
-			.conv-list__chat__list--empty {
+			.board__chat__list--empty {
 				height: 300px;
 				display: flex;
 				flex-flow: column;
@@ -116,8 +116,8 @@
 		}
 	}
 
-	.conv-list__contact {
-		.conv-list__contact__add {
+	.board__contact {
+		.board__contact__add {
 			padding: 23px 0 0;
 
 			button {
@@ -136,7 +136,7 @@
 					margin-right: 14px;
 				}
 
-				.conv-list__contact__add__badge {
+				.board__contact__add__badge {
 					position: absolute;
 					left: 50px;
 					top: 50px;
@@ -148,7 +148,7 @@
 				}
 			}
 
-			button.conv-list__contact__add__btn--active {
+			button.board__contact__add__btn--active {
 				background-color: #e5efff;
 			}
 
@@ -167,7 +167,7 @@
 			}
 		}
 
-		.conv-list__contact__list-box {
+		.board__contact__list-box {
 			height: calc(558px - 316px);
 			overflow: auto;
 
@@ -195,24 +195,24 @@
 		}
 	}
 
-	.conv-list__noti {
+	.board__noti {
 		position: relative;
 
-		.conv-list__noti__title {
+		.board__noti__title {
 			margin: 18px 0 18px 14px;
 			color: #728083;
 			font-weight: 600;
 		}
 
-		.conv-list__noti__tabs {
-			.conv-list__noti__tab {
+		.board__noti__tabs {
+			.board__noti__tab {
 				text-transform: none;
 				margin: 0 4px;
 				padding: 0;
 				min-width: unset;
 			}
 
-			.conv-list__noti__tab:nth-child(4) {
+			.board__noti__tab:nth-child(4) {
 				div {
 					display: flex;
 					align-items: center;
@@ -232,7 +232,7 @@
 			}
 		}
 
-		.conv-list__noti__select {
+		.board__noti__select {
 			position: absolute;
 			display: flex;
 			align-items: center;
@@ -242,12 +242,12 @@
 			color: rgba(0, 0, 0, 0.6);
 		}
 
-		.conv-list__noti__select:hover {
+		.board__noti__select:hover {
 			color: #0190f3;
 			cursor: pointer;
 		}
 
-		.conv-list__noti__tab-panel {
+		.board__noti__tab-panel {
 			text-align: center;
 			padding-top: 20px;
 			margin: 14px;
@@ -264,12 +264,12 @@
 		}
 	}
 
-	.conv-list__todo__main__wrapper {
+	.board__todo__main__wrapper {
 		margin-top: 5px;
 		padding: 15px 0 0 0;
 		background-color: #f9f9f9;
 
-		.conv-list__todo__main-tab {
+		.board__todo__main-tab {
 			min-width: unset;
 			padding: unset;
 			flex-flow: row;
@@ -280,12 +280,12 @@
 			}
 		}
 
-		.conv-list__todo__main-tab {
+		.board__todo__main-tab {
 			border-bottom: 1px solid #e1e4ea;
 		}
 
-		.conv-list__todo__main-tab:nth-child(4).Mui-selected,
-		.conv-list__todo__main-tab:nth-child(5).Mui-selected {
+		.board__todo__main-tab:nth-child(4).Mui-selected,
+		.board__todo__main-tab:nth-child(5).Mui-selected {
 			background-color: #fff;
 			border: 1px solid #e1e4ea;
 			border-top-left-radius: 6px;
@@ -293,30 +293,30 @@
 			border-bottom: none;
 		}
 
-		.conv-list__todo__main-tab:nth-child(5).Mui-selected {
+		.board__todo__main-tab:nth-child(5).Mui-selected {
 			border-right: none;
 		}
 
-		.conv-list__todo__main-tab:nth-child(1).Mui-selected,
-		.conv-list__todo__main-tab:nth-child(1).Mui-selected ~ .conv-list__todo__main-tab {
+		.board__todo__main-tab:nth-child(1).Mui-selected,
+		.board__todo__main-tab:nth-child(1).Mui-selected ~ .board__todo__main-tab {
 			border-bottom: none;
 		}
 
-		.conv-list__todo__main-tab:first-child {
+		.board__todo__main-tab:first-child {
 			flex-grow: 2;
 		}
 
-		.conv-list__todo__main-tab-panel {
+		.board__todo__main-tab-panel {
 			background-color: #fff;
 			height: 100%;
 		}
 
-		.conv-list__todo__main-tab-panel:nth-child(3),
-		.conv-list__todo__main-tab-panel:nth-child(4) {
+		.board__todo__main-tab-panel:nth-child(3),
+		.board__todo__main-tab-panel:nth-child(4) {
 			text-align: center;
 			padding-bottom: 40px;
 
-			.conv-list__todo__main-header {
+			.board__todo__main-header {
 				padding: 8px 16px;
 				border-bottom: 1px solid #e1e4ea;
 				display: flex;
@@ -337,8 +337,8 @@
 			}
 		}
 
-		.conv-list__todo__main-tab-panel:nth-child(3) {
-			.conv-list__todo__main-search__input {
+		.board__todo__main-tab-panel:nth-child(3) {
+			.board__todo__main-search__input {
 				padding: 18px 10px 4px;
 				border-bottom: 1px solid #e1e4ea;
 
@@ -360,7 +360,7 @@
 				}
 			}
 
-			.conv-list__todo__main-search__input + div {
+			.board__todo__main-search__input + div {
 				font-size: 14px;
 
 				div:first-child {
@@ -380,7 +380,7 @@
 			}
 		}
 
-		.conv-list__todo__main-tab-panel:nth-child(4) {
+		.board__todo__main-tab-panel:nth-child(4) {
 			height: unset;
 
 			div:nth-child(2) {
@@ -397,16 +397,16 @@
 			display: none;
 		}
 
-		.conv-list__todo__sub__wrapper {
+		.board__todo__sub__wrapper {
 			background-color: #fff;
 
-			.conv-list__todo__sub-tab {
+			.board__todo__sub-tab {
 				background-color: #fbfbfb;
 				border: 1px solid transparent;
 				border-bottom: 1px solid #e1e4ea;
 			}
 
-			.conv-list__todo__sub-tab.Mui-selected {
+			.board__todo__sub-tab.Mui-selected {
 				background-color: #fff;
 				border: 1px solid #e1e4ea;
 				border-top-left-radius: 4px;
@@ -418,8 +418,8 @@
 				display: none;
 			}
 
-			.conv-list__todo__sub-tab-panel {
-				.conv-list__todo__sub-tab-panel__tab {
+			.board__todo__sub-tab-panel {
+				.board__todo__sub-tab-panel__tab {
 					display: flex;
 					justify-content: space-between;
 					align-items: center;
@@ -427,11 +427,11 @@
 					border-bottom: 1px solid #e1e4ea;
 				}
 
-				.conv-list__todo__sub-tab-panel__job {
+				.board__todo__sub-tab-panel__job {
 					height: 100%;
 					text-align: center;
 
-					.conv-list__todo__sub-tab-panel__text {
+					.board__todo__sub-tab-panel__text {
 						margin: 40px 30px;
 						padding: 20px 15px;
 						border: 1px solid #e1e4ea;
@@ -453,11 +453,11 @@
 		}
 	}
 
-	.conv-list__star__img-box {
+	.board__star__img-box {
 		margin: 15px 14px;
 		text-align: center;
 
-		.conv-list__star__img {
+		.board__star__img {
 			margin: 70px auto 0;
 		}
 
@@ -470,19 +470,19 @@
 }
 
 .css-9qlp2p-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
-	.conv-list__chat__menu__item {
+	.board__chat__menu__item {
 		position: relative;
 
-		.conv-list__chat__text {
+		.board__chat__text {
 			font-size: 13px;
 			flex-grow: 1;
 		}
 
-		.conv-list__chat__arrow-right {
+		.board__chat__arrow-right {
 			color: #adbbd5;
 		}
 
-		.conv-list__chat__delete {
+		.board__chat__delete {
 			color: #db342e;
 			font-size: 13px;
 		}

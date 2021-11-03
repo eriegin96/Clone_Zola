@@ -9,7 +9,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import { Input } from 'antd';
 import { AppContext } from 'context/AppProvider';
-import img from 'resources/img/conv-list/search.png'
+import img from 'resources/img/board/search.png'
 import TodoTabs from './TodoTabs';
 
 function TabPanel(props) {
@@ -21,7 +21,7 @@ function TabPanel(props) {
 			hidden={value !== index}
 			id={`tabpanel-${index}`}
 			aria-labelledby={`tab-${index}`}
-			className="conv-list__todo__main-tab-panel"
+			className="board__todo__main-tab-panel"
 			{...other}
 		>
 			{value === index && <>{children}</>}
@@ -36,20 +36,20 @@ function tabProps(index) {
 	};
 }
 
-export default function ConvListTodo() {
-	const { initialActiveChatWindow, setActiveChatWindow } = useContext(AppContext);
+export default function BoardTodo() {
+	const { setActiveWindow } = useContext(AppContext);
 	const [value, setValue] = useState(0);
 
 	const handleChange = (event, newValue) => {
 		if (newValue === 2) {
-			setActiveChatWindow({ ...initialActiveChatWindow, chat: true });
+			setActiveWindow('chat');
 			return;
 		}
 		setValue(newValue);
 	};
 
 	return (
-		<div className="conv-list__todo__main__wrapper">
+		<div className="board__todo__main__wrapper">
 			<Box>
 				<Tabs
 					value={value}
@@ -67,26 +67,26 @@ export default function ConvListTodo() {
 							</>
 						}
 						{...tabProps(0)}
-						className="conv-list__todo__main-tab"
+						className="board__todo__main-tab"
 					/>
-					<Box flexGrow={1} className="conv-list__todo__main-tab" />
+					<Box flexGrow={1} className="board__todo__main-tab" />
 					<Tab
 						title="Gửi góp ý và yêu cầu hỗ trợ"
 						label={<ChatOutlinedIcon size="small" />}
 						{...tabProps(2)}
-						className="conv-list__todo__main-tab"
+						className="board__todo__main-tab"
 					/>
 					<Tab
 						title="Tìm kiếm"
 						label={<SearchIcon />}
 						{...tabProps(3)}
-						className="conv-list__todo__main-tab"
+						className="board__todo__main-tab"
 					/>
 					<Tab
 						title="Thống kê công việc"
 						label={<PieChartOutlineIcon />}
 						{...tabProps(4)}
-						className="conv-list__todo__main-tab"
+						className="board__todo__main-tab"
 					/>
 				</Tabs>
 			</Box>
@@ -94,13 +94,13 @@ export default function ConvListTodo() {
 				<TodoTabs />
 			</TabPanel>
 			<TabPanel value={value} index={3}>
-				<div className="conv-list__todo__main-header">
+				<div className="board__todo__main-header">
 					<Typography variant="body2" component="span">
 						TÌM KIẾM CÔNG VIỆC
 					</Typography>
 					<CloseIcon onClick={() => setValue(0)} />
 				</div>
-				<div className="conv-list__todo__main-search__input">
+				<div className="board__todo__main-search__input">
 					<Input placeholder="Tìm kiếm công việc" style={{ borderRadius: '20px' }} />
 					<div>
 						<FilterAltOutlinedIcon />
@@ -114,7 +114,7 @@ export default function ConvListTodo() {
 				</div>
 			</TabPanel>
 			<TabPanel value={value} index={4}>
-				<div className="conv-list__todo__main-header">
+				<div className="board__todo__main-header">
 					<Typography variant="body2" component="span">
 						Thống kê công việc:
 					</Typography>

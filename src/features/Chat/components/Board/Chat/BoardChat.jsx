@@ -19,11 +19,11 @@ import SettingsApplicationsOutlinedIcon from '@mui/icons-material/SettingsApplic
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import img from 'resources/img/conv-list/label.png';
-import { AppContext } from 'context/AppProvider';
+import img from 'resources/img/board/label.png';
 import ChatMenu from './ChatMenu';
 import { useFirestore, useFirestoreRecentList } from 'hooks/useFirestore';
 import { AuthContext } from 'context/AuthProvider';
+import { AppContext } from 'context/AppProvider';
 
 const cates = [
 	{
@@ -59,25 +59,11 @@ const AccordionSummary = styled((props) => <MuiAccordionSummary {...props} />)((
 	},
 }));
 
-export default function ConvListChat(props) {
+export default function BoardChat() {
 	const { user } = useContext(AuthContext);
-	const {
-		initialActiveChatWindow,
-		setActiveChatWindow,
-		rooms,
-		selectedRoomId,
-		setSelectedRoomId,
-		setMessages,
-	} = useContext(AppContext);
-	const initialActiveCate = {
-		all: false,
-		client: false,
-		family: false,
-		work: false,
-		friends: false,
-		later: false,
-	};
-	const [activeCate, setActiveCate] = useState({ ...initialActiveCate, all: true });
+	const { setActiveWindow, rooms, selectedRoomId, setSelectedRoomId, setMessages } =
+		useContext(AppContext);
+	const [activeCate, setActiveCate] = useState('all');
 	const [height, setHeight] = useState('48px');
 	const [anchorEl, setAnchorEl] = useState(() => Array(rooms.length).fill(null));
 	const [open, setOpen] = useState(() => Array(rooms.length).fill(false));
@@ -108,8 +94,8 @@ export default function ConvListChat(props) {
 	};
 
 	return (
-		<div className="conv-list__chat">
-			<div className="conv-list__chat__category">
+		<div className="board__chat">
+			<div className="board__chat__category">
 				<Accordion disableGutters>
 					<AccordionSummary
 						expandIcon={<ArrowRightIcon sx={{ fontSize: '24px' }} />}
@@ -127,12 +113,10 @@ export default function ConvListChat(props) {
 							<Chip
 								key={i}
 								label={cate.label}
-								color={activeCate[cate.type] ? 'primary' : 'default'}
+								color={activeCate === cate.type ? 'primary' : 'default'}
 								size="small"
 								onClick={() => {
-									const active = { ...initialActiveCate };
-									active[cate.type] = true;
-									setActiveCate(active);
+									setActiveCate(cate.type);
 								}}
 								sx={{ margin: '4px 2px' }}
 							/>
@@ -148,14 +132,14 @@ export default function ConvListChat(props) {
 				</Accordion>
 			</div>
 			<Divider sx={{ marginTop: '4px' }} />
-			<div className="conv-list__chat__list">
-				<div className="conv-list__chat__list-header">
+			<div className="board__chat__list">
+				<div className="board__chat__list-header">
 					<span>
 						Tất cả tin nhắn <ExpandMoreIcon />
 					</span>
 					<span>Đánh dấu đã đọc</span>
 				</div>
-				{activeCate.all ? (
+				{activeCate === 'all' ? (
 					<List
 						sx={{
 							height: `calc(536px - ${height})`,
@@ -166,7 +150,7 @@ export default function ConvListChat(props) {
 						dense
 						component="div"
 						role="list"
-						className="conv-list__contact__list"
+						className="board__contact__list"
 					>
 						{rooms.map((room, i) => {
 							const labelId = `item-${i}-label`;
@@ -182,10 +166,7 @@ export default function ConvListChat(props) {
 												return prevState;
 											});
 											setSelectedRoomId(room.id);
-											setActiveChatWindow({
-												...initialActiveChatWindow,
-												chat: true,
-											});
+											setActiveWindow('chat');
 										}}
 										secondaryAction={
 											<IconButton
@@ -229,7 +210,7 @@ export default function ConvListChat(props) {
 						})}
 					</List>
 				) : (
-					<div className="conv-list__chat__list--empty">
+					<div className="board__chat__list--empty">
 						<img src={img} alt="empty" />
 						<div>Phân loại hội thoại để ghi nhớ và nhận biết dễ dàng hơn</div>
 						<Button variant="contained" color="secondary">

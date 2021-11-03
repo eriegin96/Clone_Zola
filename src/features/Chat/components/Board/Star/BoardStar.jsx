@@ -1,8 +1,8 @@
 import React from 'react';
 import { Typography } from '@mui/material';
-import img from 'resources/img/conv-list/star.png';
+import img from 'resources/img/board/star.png';
 
-export default function ConvListStar() {
+export default function BoardStar() {
 	return (
 		<div>
 			<Typography
@@ -12,8 +12,8 @@ export default function ConvListStar() {
 			>
 				Tin Đánh Dấu
 			</Typography>
-			<div className='conv-list__star__img-box'>
-				<img src={img} alt="star" className='conv-list__star__img'/>
+			<div className='board__star__img-box'>
+				<img src={img} alt="star" className='board__star__img'/>
 				<Typography variant="body2" component="p">
 					Đánh dấu tin nhắn để có thể tìm lại một cách nhanh chóng. Các tin nhắn được đánh
 					dấu sẽ xuất hiện ở đây.

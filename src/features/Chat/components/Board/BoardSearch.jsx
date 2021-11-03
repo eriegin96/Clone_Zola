@@ -5,14 +5,14 @@ import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
 import SearchIcon from '@mui/icons-material/Search';
 import { Input } from 'antd';
 
-export default function ConvSearch() {
+export default function BoardSearch() {
 	return (
-		<div className="conv-list__search__box">
+		<div className="board__search__box">
 			<Input
 				size="medium"
 				placeholder="Tìm kiếm"
 				prefix={<SearchIcon />}
-        className='conv-list__search__input'
+        className='board__search__input'
 			/>
 			<IconButton title="Thêm bạn">
 				<PersonAddOutlinedIcon fontSize="small" />

@@ -1,4 +1,4 @@
-import { createRooms } from 'firebase/services';
+import React, { createContext, useContext, useMemo, useState } from 'react';
 import {
 	useFirestore,
 	useFirestoreContactList,
@@ -7,7 +7,6 @@ import {
 	useFirestoreRecentList,
 	useFirestoreSuggestList,
 } from 'hooks/useFirestore';
-import React, { createContext, useContext, useMemo, useState } from 'react';
 import { AuthContext } from './AuthProvider';
 
 export const AppContext = createContext();
@@ -18,39 +17,8 @@ export default function AppProvider({ children }) {
 	const [selectedRoomId, setSelectedRoomId] = useState('');
 	const [messages, setMessages] = useState([]);
 
-	// Navbar Tab Selection
-	const initialActiveTab = {
-		chat: false,
-		contact: false,
-		noti: false,
-		todo: false,
-		bookmark: false,
-		setting: false,
-	};
-	const [activeTab, setActiveTab] = useState({ ...initialActiveTab, chat: true });
-
-	// Chat Window Selection
-	const initialActiveChatWindow = {
-		start: false,
-		chat: false,
-		addFriend: false,
-		addGroup: false,
-	};
-	const [activeChatWindow, setActiveChatWindow] = useState({
-		...initialActiveChatWindow,
-		start: true,
-	});
-
-	// Conversation Selection
-	const initialActiveConversation = {
-		cloud: false,
-		zalopay: false,
-		gamecenter: false,
-	};
-	const [activeConversation, setActiveConversation] = useState({
-		...initialActiveConversation,             
-		cloud: true,
-	});
+	const [activeTab, setActiveTab] = useState('chat');
+	const [activeWindow, setActiveWindow] = useState('start');
 
 	const groupList = useMemo(() => {
 		const arr = [];
@@ -92,15 +60,10 @@ export default function AppProvider({ children }) {
 			value={{
 				isVN,
 				setIsVN,
-				initialActiveTab,
 				activeTab,
 				setActiveTab,
-				initialActiveChatWindow,
-				activeChatWindow,
-				setActiveChatWindow,
-				initialActiveConversation,
-				activeConversation,
-				setActiveConversation,
+				activeWindow,
+				setActiveWindow,
 				groupList,
 				rooms,
 				members,
