@@ -15,7 +15,8 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import { Input } from 'antd';
 import img from 'resources/img/invite-dialog.png';
 import ShareList from './ShareList';
-import { AppContext } from 'context/AppProvider';
+import { AuthContext } from 'context/AuthProvider';
+import { useFirestoreContactList } from 'hooks/useFirestore';
 
 const cates = [
 	{
@@ -45,7 +46,8 @@ const cates = [
 ];
 
 export default function InviteDialog({ open, setOpen }) {
-	const { contactList } = useContext(AppContext);
+	const { user } = useContext(AuthContext);
+	const contactList = useFirestoreContactList(user.uid);
 	const initialChipActive = {
 		all: false,
 		client: false,

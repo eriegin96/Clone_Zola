@@ -21,13 +21,17 @@ import { AppContext } from 'context/AppProvider';
 
 export default function ConvListContact(props) {
 	const { contactList } = props;
-	const { initialActiveChatWindow, setActiveChatWindow, rooms, setSelectedRoomId } =
+	const { initialActiveChatWindow, setActiveChatWindow, rooms, selectedRoomId, setSelectedRoomId, setMessages } =
 		useContext(AppContext);
 	const initialActiveBtn = { addFriend: false, addGroup: false, cloud: false };
 	const [activeBtn, setActiveBtn] = useState({ ...initialActiveBtn, addFriend: true });
 
 	const openChatBox = (i) => {
 		const selected = rooms.find((room) => room.members.includes(contactList[i].uid));
+		setMessages((prevState) => {
+			if (selected.id !== selectedRoomId) return null;
+			return prevState;
+		});
 		setSelectedRoomId(selected.id);
 		setActiveChatWindow({ ...initialActiveChatWindow, chat: true });
 	};

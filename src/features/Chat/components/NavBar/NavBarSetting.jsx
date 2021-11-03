@@ -7,10 +7,12 @@ import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
-import LogoutDialog from './Dialogs/LogoutDialog';
+import LogoutDialog from './Dialogs/LogoutDialog/LogoutDialog';
+import AccountDialog from './Dialogs/AccountDialog/AccountDialog';
 
 export default function NavBarSetting(props) {
 	const { activeTab, setActiveTab } = props;
+	const [openAccountDialog, setOpenAccountDialog] = useState(false);
 	const [openLogoutDialog, setOpenLogoutDialog] = useState(false);
 	const [anchorEl, setAnchorEl] = useState(null);
 	const open = Boolean(anchorEl);
@@ -52,7 +54,10 @@ export default function NavBarSetting(props) {
 				transformOrigin={{ horizontal: 'right', vertical: 'bottom' }}
 				anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
 			>
-				<MenuItem className="navbar__setting__menu__item">
+				<MenuItem
+					className="navbar__setting__menu__item"
+					onClick={() => setOpenAccountDialog(true)}
+				>
 					<PermIdentityIcon fontSize="small" />
 					<span className="navbar__setting__text">Tài khoản</span>
 				</MenuItem>
@@ -95,10 +100,16 @@ export default function NavBarSetting(props) {
 					/>
 				</MenuItem>
 				<Divider variant="middle" sx={{ margin: '4px 16px !important' }} />
-				<MenuItem className="navbar__setting__menu__item" onClick={() => {setOpenLogoutDialog(true)}}>
+				<MenuItem
+					className="navbar__setting__menu__item"
+					onClick={() => {
+						setOpenLogoutDialog(true);
+					}}
+				>
 					<div className="navbar__setting__logout">Đăng xuất</div>
 				</MenuItem>
 			</Menu>
+			<AccountDialog open={openAccountDialog} setOpen={setOpenAccountDialog} />
 			<LogoutDialog open={openLogoutDialog} setOpen={setOpenLogoutDialog} />
 		</>
 	);

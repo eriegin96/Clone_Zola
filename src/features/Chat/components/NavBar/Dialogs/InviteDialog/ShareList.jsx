@@ -41,20 +41,20 @@ export default function ShareList(props) {
 				component="div"
 				role="list"
 			>
-				{left.map((value) => {
-					const labelId = `transfer-list-all-item-${value}-label`;
+				{left.map((item, i) => {
+					const labelId = `transfer-list-all-item-${i}-label`;
 
 					return (
 						<ListItem
-							key={value}
+							key={i}
 							role="listitem"
 							button
 							sx={{ padding: '4px 0', width: '100%' }}
-							onClick={() => handleToggle(value)}
+							onClick={() => handleToggle(i)}
 						>
 							<ListItemIcon>
 								<Checkbox
-									checked={right.indexOf(value) !== -1}
+									checked={right.indexOf(item) !== -1}
 									tabIndex={-1}
 									disableRipple
 									sx={{ paddingLeft: '4px' }}
@@ -62,9 +62,9 @@ export default function ShareList(props) {
 										'aria-labelledby': labelId,
 									}}
 								/>
-								<Avatar sx={{ marginRight: '6px' }} />
+								<Avatar sx={{ marginRight: '6px' }} src={item.photoURL} />
 							</ListItemIcon>
-							<ListItemText id={labelId} primary={`Danh bạ ${value}`} />
+							<ListItemText id={labelId} primary={item.displayName} />
 						</ListItem>
 					);
 				})}

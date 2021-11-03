@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Box, Avatar, Menu, MenuItem, Divider, Stack } from '@mui/material';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import img from 'resources/img/avatar-invite.png';
 import InviteDialog from './Dialogs/InviteDialog/InviteDialog';
+import { AuthContext } from 'context/AuthProvider';
+import AccountDialog from './Dialogs/AccountDialog/AccountDialog';
 
 export default function NavBarAvatar() {
+	const { user } = useContext(AuthContext);
+	const [openAccountDialog, setOpenAccountDialog] = useState(false);
 	const [openInviteDialog, setOpenInviteDialog] = useState(false);
 	const [anchorEl, setAnchorEl] = useState(null);
 	const open = Boolean(anchorEl);
@@ -18,7 +22,9 @@ export default function NavBarAvatar() {
 
 	return (
 		<Box className="navbar__avatar-box">
-			<Avatar onClick={handleClick} className="navbar__avatar" />
+			<Avatar onClick={handleClick} className="navbar__avatar">
+				{user.displayName.charAt(0)}
+			</Avatar>
 			<Menu
 				anchorEl={anchorEl}
 				open={open}
@@ -33,7 +39,10 @@ export default function NavBarAvatar() {
 				transformOrigin={{ horizontal: 'right', vertical: 'top' }}
 				anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
 			>
-				<MenuItem className="navbar__avatar__menu__item">
+				<MenuItem
+					className="navbar__avatar__menu__item"
+					onClick={() => setOpenAccountDialog(true)}
+				>
 					<PermIdentityIcon fontSize="small" />
 					<span>Tài khoản</span>
 				</MenuItem>
@@ -55,9 +64,10 @@ export default function NavBarAvatar() {
 					onClick={() => setOpenInviteDialog(true)}
 				>
 					<span>Mời đồng nghiệp sử dụng Zola PC</span>
-					<img src={img} alt='menu' className="navbar__avatar__menu__img"></img>
+					<img src={img} alt="menu" className="navbar__avatar__menu__img"></img>
 				</Stack>
 			</Menu>
+			<AccountDialog open={openAccountDialog} setOpen={setOpenAccountDialog} />
 			<InviteDialog open={openInviteDialog} setOpen={setOpenInviteDialog} />
 		</Box>
 	);

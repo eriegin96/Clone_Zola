@@ -178,7 +178,7 @@ export default function ConvListChat(props) {
 										disableRipple
 										onClick={() => {
 											setMessages((prevState) => {
-												if (selectedRoomId !== room.id) return [];
+												if (selectedRoomId !== room.id) return null;
 												return prevState;
 											});
 											setSelectedRoomId(room.id);

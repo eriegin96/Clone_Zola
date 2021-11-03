@@ -14,7 +14,7 @@ export default function WindowChatHeader() {
 	return (
 		<div className="chat-window__chat__header">
 			<div className="chat-window__chat__header__title">
-				<Avatar src={members?.photoURL || imgCloud}/>
+				<Avatar src={members?.photoURL}>{members?.displayName?.charAt(0)}</Avatar>
 				<div>
 					<Typography variant="body1" component="div">
 						{members?.displayName || 'Cloud của tôi'}

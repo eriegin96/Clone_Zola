@@ -81,21 +81,9 @@ export const getUserData = (uid) => {
 export const addUser = (uid, data) => {
 	const userRef = doc(db, 'users', uid);
 
-	// create fake friend list
-	// const randomFriendsList = usersList.slice(start, start + 5);
-	// const filteredList = [];
-	// for (let i = 0; i < randomFriendsList.length; i++) {
-	// 	const {
-	// 		login: { uuid },
-	// 	} = randomFriendsList[i];
-	// 	filteredList.push(uuid);
-	// }
-
 	async function asyncSetDoc() {
 		await setDoc(userRef, {
 			...data,
-			// friends: filteredList,
-			friends: [],
 			createdAt: serverTimestamp(),
 		});
 	}
@@ -103,25 +91,42 @@ export const addUser = (uid, data) => {
 	asyncSetDoc();
 };
 
+export const updateUser = (uid, data) => {
+	const userRef = doc(db, 'users', uid);
+
+	async function asyncUpdateDoc() {
+		await updateDoc(userRef, {
+			...data
+		});
+	}
+
+	asyncUpdateDoc();
+};
+
 export const addFriend = (uid, friendId) => {
-	const userRef = doc(db, 'users', uid, 'friends', friendId);
+	const userRef = doc(db, 'users', uid);
+	const friendOfFriendRef = doc(db, 'users', friendId, 'friends', uid);
 	const friendRef = doc(db, 'users', friendId);
+	const friendOfUserRef = doc(db, 'users', uid, 'friends', friendId);
 
 	async function asyncAddRoom() {
-		// const userSnap = await getDoc(userRef);
-		// const data = userSnap.data();
-		// const newFriends = [...data.friends, friendId];
+		// add user to friend
+		const userSnap = await getDoc(userRef);
+		await setDoc(friendOfFriendRef, {
+			uid: uid,
+			photoURL: userSnap.data().photoURL,
+			displayName: userSnap.data().displayName,
+			cell: userSnap.data(),
+			createdAt: serverTimestamp(),
+		});
 
-		// await updateDoc(userRef, {
-		// 	friends: newFriends,
-		// });
+		// add friend to user
 		const friendSnap = await getDoc(friendRef);
-		const { photoURL, displayName, cell = null } = friendSnap.data();
-		await setDoc(userRef, {
+		await setDoc(friendOfUserRef, {
 			uid: friendId,
-			photoURL,
-			displayName,
-			cell,
+			photoURL: friendSnap.data().photoURL,
+			displayName: friendSnap.data().displayName,
+			cell: friendSnap.data(),
 			createdAt: serverTimestamp(),
 		});
 	}
