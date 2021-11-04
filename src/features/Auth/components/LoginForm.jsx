@@ -3,12 +3,9 @@ import {
 	signInWithPopup,
 	GoogleAuthProvider,
 	FacebookAuthProvider,
-	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 	fetchSignInMethodsForEmail,
 } from 'firebase/auth';
-import { useForm, useController, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Button, InputAdornment, Link, Stack, TextField } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
@@ -23,46 +20,23 @@ const facebookProvider = new FacebookAuthProvider();
 const googleProvider = new GoogleAuthProvider();
 const providers = { 'google.com': googleProvider, 'facebook.com': facebookProvider };
 
-const checkUserExist = (additionalUserInfo, user) => {
-	if (additionalUserInfo?.isNewUser) {
-		addUser(user.uid, {
-			displayName: user.displayName,
-			email: user.email,
-			photoURL: user.photoURL,
-			uid: user.uid,
-			providerId: additionalUserInfo.providerId,
-		});
-		return;
-	}
-};
-
-export default function LoginForm() {
+export default function LoginForm({ setOpenUserNotFoundDialog }) {
 	const { isVN } = useContext(AppContext);
 	const [isValidated, setIsValidated] = useState(true);
-	const [errorMessage, setErrorMessage] = useState('');
+	const [error, setError] = useState({});
 	const emailRef = useRef(null);
 	const passwordRef = useRef(null);
 
 	const validationSchema = yup.object().shape({
-		email: yup
-			.string()
-			.email(isVN ? 'Email không đúng' : 'Email is not valid')
-			.required(isVN ? 'Vui lòng nhập email' : 'Email is required'),
 		password: yup
 			.string()
 			.required(isVN ? 'Vui lòng nhập mật khẩu' : 'Password is required')
 			.min(6, isVN ? 'Mật khẩu tối thiểu 6 ký tự' : 'Password must be at least 6 characters'),
+		email: yup
+			.string()
+			.email(isVN ? 'Email không đúng' : 'Email is not valid')
+			.required(isVN ? 'Vui lòng nhập email' : 'Email is required'),
 	});
-
-	// const {
-	// 	register,
-	// 	handleSubmit,
-	// 	control,
-	// 	formState: { errors },
-	// } = useForm({
-	// 	resolver: yupResolver(validationSchema),
-	// });
-	// const onSubmit = (data) => console.log(data);
 
 	const handleLoginEmail = () => {
 		validationSchema
@@ -82,7 +56,9 @@ export default function LoginForm() {
 						})
 						.catch((error) => {
 							const errorCode = error.code;
-							console.log(errorCode);
+							if (errorCode === 'auth/user-not-found') {
+								setOpenUserNotFoundDialog(true);
+							}
 						});
 					return;
 				}
@@ -94,10 +70,25 @@ export default function LoginForm() {
 						password: passwordRef.current.value,
 					})
 					.catch((err) => {
-						setErrorMessage(err.message);
+						setError(err);
 						console.log(err.message);
 					});
 			});
+	};
+
+	const checkUserExist = (additionalUserInfo, user) => {
+		if (additionalUserInfo?.isNewUser) {
+			addUser(user.uid, {
+				displayName: user.displayName,
+				email: user.email,
+				photoURL: user.photoURL,
+				uid: user.uid,
+				providerId: additionalUserInfo.providerId,
+				gender: user?.gender,
+				date: user?.date,
+			});
+			return;
+		}
 	};
 
 	const handleLogin = async (provider) => {
@@ -136,7 +127,7 @@ export default function LoginForm() {
 						variant="standard"
 						label="Email"
 						error={!isValidated}
-						helperText={errorMessage}
+						helperText={error.path === 'email' && error.message}
 						fullWidth
 						InputProps={{
 							startAdornment: (
@@ -153,7 +144,7 @@ export default function LoginForm() {
 						type="password"
 						label={isVN ? 'Mật khẩu' : 'Password'}
 						error={!isValidated}
-						helperText={errorMessage}
+						helperText={error.path === 'password' && error.message}
 						fullWidth
 						InputProps={{
 							startAdornment: (
@@ -168,7 +159,6 @@ export default function LoginForm() {
 						fullWidth
 						type="submit"
 						variant="contained"
-						// disabled={isValidated}
 						onClick={handleLoginEmail}
 						className="form__btn--email"
 					>
@@ -210,7 +200,6 @@ export default function LoginForm() {
 					>
 						Create User Data
 					</Button>
-					{/*  */}
 					<Link underline="hover" className="form__forgot-password">
 						{isVN ? 'Quên mật khẩu?' : 'Forgot password?'}
 					</Link>

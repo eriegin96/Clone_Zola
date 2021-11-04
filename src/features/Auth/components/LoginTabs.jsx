@@ -27,7 +27,7 @@ function tabProps(index) {
 	};
 }
 
-export default function LoginTabs() {
+export default function LoginTabs({ setOpenUserNotFoundDialog }) {
 	const { isVN } = useContext(AppContext);
 	const [value, setValue] = useState(0);
 	const [isQrError, setIsQrError] = useState(false);
@@ -81,7 +81,7 @@ export default function LoginTabs() {
 				</div>
 			</TabPanel>
 			<TabPanel value={value} index={1} className="login__form__tab-panel">
-				<LoginForm />
+				<LoginForm setOpenUserNotFoundDialog={setOpenUserNotFoundDialog} />
 			</TabPanel>
 		</Box>
 	);

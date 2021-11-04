@@ -1,12 +1,16 @@
-import { Link, Typography } from '@mui/material';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import { Link, Typography, Button } from '@mui/material';
 import './loginPage.scss';
+import '../components/loginComponents.scss';
 import { AppContext } from 'context/AppProvider';
 import LoginTabs from '../components/LoginTabs';
-import '../components/loginComponents.scss';
+import RegisterDialog from '../components/Dialogs/RegisterDialog';
+import UserNotFoundDialog from '../components/Dialogs/UserNotFoundDialog';
 
 export default function LoginPage() {
 	const { isVN, setIsVN } = useContext(AppContext);
+	const [openUserNotFoundDialog, setOpenUserNotFoundDialog] = useState(false);
+	const [openRegisterDialog, setOpenRegisterDialog] = useState(false);
 
 	return (
 		<div className="login__page">
@@ -21,15 +25,12 @@ export default function LoginPage() {
 					<br />
 					{isVN ? 'để kết nối với ứng dụng Zola Chat' : 'to connect to Zola Chat'}
 				</Typography>
-				<LoginTabs/>
+				<LoginTabs setOpenUserNotFoundDialog={setOpenUserNotFoundDialog} />
 				<Typography variant="body2" component="p" className="login__register">
 					{isVN ? 'Bạn chưa có tài khoản? ' : "Don't have an account? "}
-					<Link
-						href="https://id.zalo.me/account/static/zalo-register.html"
-						sx={{ fontWeight: 'bold' }}
-					>
+					<Button variant="text" onClick={() => setOpenRegisterDialog(true)}>
 						{isVN ? 'Đăng ký ngay!' : 'Register now!'}
-					</Link>
+					</Button>
 				</Typography>
 				<div className="login__footer">
 					<div className="login__langs">
@@ -81,6 +82,12 @@ export default function LoginPage() {
 						</li>
 					</ul>
 				</div>
+				<UserNotFoundDialog
+					open={openUserNotFoundDialog}
+					setOpen={setOpenUserNotFoundDialog}
+					setOpenRegisterDialog={setOpenRegisterDialog}
+				/>
+				<RegisterDialog open={openRegisterDialog} setOpen={setOpenRegisterDialog} />
 			</div>
 		</div>
 	);

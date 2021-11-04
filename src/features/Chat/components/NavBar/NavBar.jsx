@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import './navBar.scss';
 import './Dialogs/navbarDialogs.scss';
 import { Box, Stack } from '@mui/material';
@@ -15,19 +15,22 @@ import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import NavBarAvatar from './NavBarAvatar';
 import NavBarSetting from './NavBarSetting';
+import LogoutDialog from './Dialogs/LogoutDialog/LogoutDialog';
+import AccountDialog from './Dialogs/AccountDialog/AccountDialog';
 import { AppContext } from 'context/AppProvider';
 
 export default function NavBar() {
-	const {
-		activeTab,
-		setActiveTab,
-		setActiveWindow,
-	} = useContext(AppContext);
+	const { activeTab, setActiveTab, setActiveWindow } = useContext(AppContext);
+	const [openAccountDialog, setOpenAccountDialog] = useState(false);
+	const [openLogoutDialog, setOpenLogoutDialog] = useState(false);
 
 	return (
 		<React.Fragment>
 			<Stack className="navbar">
-				<NavBarAvatar />
+				<NavBarAvatar
+					setOpenAccountDialog={setOpenAccountDialog}
+					setOpenLogoutDialog={setOpenLogoutDialog}
+				/>
 				<button
 					title="Tin nhắn"
 					className={activeTab === 'chat' ? 'navbar__btn--active' : 'navbar__btn'}
@@ -95,7 +98,7 @@ export default function NavBar() {
 				</button>
 				<button
 					title="Đánh dấu"
-					className={activeTab  === 'star' ? 'navbar__btn--active' : 'navbar__btn'}
+					className={activeTab === 'star' ? 'navbar__btn--active' : 'navbar__btn'}
 					onClick={() => {
 						setActiveTab('star');
 					}}
@@ -107,8 +110,12 @@ export default function NavBar() {
 					)}
 				</button>
 				<NavBarSetting
+					setOpenAccountDialog={setOpenAccountDialog}
+					setOpenLogoutDialog={setOpenLogoutDialog}
 				/>
 			</Stack>
+			<AccountDialog open={openAccountDialog} setOpen={setOpenAccountDialog} />
+			<LogoutDialog open={openLogoutDialog} setOpen={setOpenLogoutDialog} />
 		</React.Fragment>
 	);
 }

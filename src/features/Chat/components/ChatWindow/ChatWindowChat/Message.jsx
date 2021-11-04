@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Avatar } from '@mui/material';
 import { AuthContext } from 'context/AuthProvider';
-import { format } from 'date-fns/esm';
+import moment from 'moment';
 
 export default function Message(props) {
 	const { user } = useContext(AuthContext);
@@ -11,7 +11,7 @@ export default function Message(props) {
 		let formattedDate = '';
 
 		if (seconds) {
-			formattedDate = format(new Date(seconds * 1000), 'h:mm a');
+			formattedDate = moment(new Date(seconds * 1000), 'h:mm A').format('h:mm A');
 		}
 
 		return formattedDate;

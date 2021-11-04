@@ -5,11 +5,9 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import img from 'resources/img/avatar-invite.png';
 import InviteDialog from './Dialogs/InviteDialog/InviteDialog';
 import { AuthContext } from 'context/AuthProvider';
-import AccountDialog from './Dialogs/AccountDialog/AccountDialog';
 
-export default function NavBarAvatar() {
+export default function NavBarAvatar({ setOpenAccountDialog, setOpenLogoutDialog }) {
 	const { user } = useContext(AuthContext);
-	const [openAccountDialog, setOpenAccountDialog] = useState(false);
 	const [openInviteDialog, setOpenInviteDialog] = useState(false);
 	const [anchorEl, setAnchorEl] = useState(null);
 	const open = Boolean(anchorEl);
@@ -51,7 +49,10 @@ export default function NavBarAvatar() {
 					<span>Cài đặt</span>
 				</MenuItem>
 				<Divider variant="middle" className="navbar__avatar__menu__divider" />
-				<MenuItem className="navbar__avatar__menu__item ">
+				<MenuItem
+					className="navbar__avatar__menu__item"
+					onClick={() => setOpenLogoutDialog(true)}
+				>
 					<span style={{ color: '#db342e', marginLeft: '24px' }}>Đăng xuất</span>
 				</MenuItem>
 				<Divider variant="middle" className="navbar__avatar__menu__divider" />
@@ -67,7 +68,6 @@ export default function NavBarAvatar() {
 					<img src={img} alt="menu" className="navbar__avatar__menu__img"></img>
 				</Stack>
 			</Menu>
-			<AccountDialog open={openAccountDialog} setOpen={setOpenAccountDialog} />
 			<InviteDialog open={openInviteDialog} setOpen={setOpenInviteDialog} />
 		</Box>
 	);
