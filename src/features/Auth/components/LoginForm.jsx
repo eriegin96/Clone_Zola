@@ -86,6 +86,7 @@ export default function LoginForm({ setOpenUserNotFoundDialog }) {
 				providerId: additionalUserInfo.providerId,
 				gender: user?.gender || null,
 				date: user?.date || null,
+				phoneNumber: user.phoneNumber,
 			});
 			return;
 		}
@@ -95,6 +96,7 @@ export default function LoginForm({ setOpenUserNotFoundDialog }) {
 		signInWithPopup(auth, provider)
 			.then((result) => {
 				const { _tokenResponse, user } = result;
+				console.log(user)
 				checkUserExist(_tokenResponse, user);
 			})
 			.catch((error) => {

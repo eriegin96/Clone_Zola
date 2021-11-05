@@ -22,7 +22,7 @@ export default function WindowChatContent() {
 		<div className="chat-window__chat__container__content">
 			<div
 				className="chat-window__chat__container__content-bg"
-				style={{ backgroundImage: `url(${members?.photoURL || imgCloud})` }}
+				style={{ backgroundImage: `url(${selectedRoom.photoURL || members?.photoURL || imgCloud})` }}
 			></div>
 			<div className="chat-window__chat__container__content-conv">
 				<OverlayScrollbarsComponent

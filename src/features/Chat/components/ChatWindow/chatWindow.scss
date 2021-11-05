@@ -139,7 +139,6 @@
 
 		.chat-window__chat__container__content {
 			position: relative;
-			max-height: 455px;
 			overflow: clip;
 			flex-grow: 1;
 
@@ -176,6 +175,7 @@
 							.chat-window__chat__container__content-conv__mess__text {
 								padding: 12px;
 								border-radius: 8px;
+								max-width: 70%;
 
 								div {
 									font-size: 13px;

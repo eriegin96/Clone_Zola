@@ -35,7 +35,7 @@ export default function NavBar() {
 					className={activeTab === 'chat' ? 'navbar__btn--active' : 'navbar__btn'}
 					onClick={() => {
 						setActiveTab('chat');
-						setActiveWindow('chat');
+						setActiveWindow('start');
 					}}
 				>
 					{activeTab === 'chat' ? (
