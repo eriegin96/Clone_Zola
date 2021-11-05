@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import './navBar.scss';
-import './Dialogs/navbarDialogs.scss';
 import { Box, Stack } from '@mui/material';
 import ChatIcon from '@mui/icons-material/Chat';
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
@@ -15,8 +14,8 @@ import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import NavBarAvatar from './NavBarAvatar';
 import NavBarSetting from './NavBarSetting';
-import LogoutDialog from './Dialogs/LogoutDialog/LogoutDialog';
-import AccountDialog from './Dialogs/AccountDialog/AccountDialog';
+import LogoutDialog from '../Dialogs/LogoutDialog/LogoutDialog';
+import AccountDialog from '../Dialogs/AccountDialog/AccountDialog';
 import { AppContext } from 'context/AppProvider';
 
 export default function NavBar() {

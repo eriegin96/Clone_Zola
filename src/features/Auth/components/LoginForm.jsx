@@ -84,8 +84,8 @@ export default function LoginForm({ setOpenUserNotFoundDialog }) {
 				photoURL: user.photoURL,
 				uid: user.uid,
 				providerId: additionalUserInfo.providerId,
-				gender: user?.gender,
-				date: user?.date,
+				gender: user?.gender || null,
+				date: user?.date || null,
 			});
 			return;
 		}

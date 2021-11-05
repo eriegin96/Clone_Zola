@@ -50,7 +50,7 @@ export default function ShareList(props) {
 							role="listitem"
 							button
 							sx={{ padding: '4px 0', width: '100%' }}
-							onClick={() => handleToggle(i)}
+							onClick={() => handleToggle(item)}
 						>
 							<ListItemIcon>
 								<Checkbox
@@ -84,15 +84,15 @@ export default function ShareList(props) {
 				</span>
 			</div>
 			<div className="invite-dialog__share-selected-list">
-				{right.map((value) => {
+				{right.map((item, i) => {
 					return (
 						<Chip
-							key={value}
+							key={i}
 							color="secondary"
-							avatar={<Avatar />}
-							label={`Danh bạ ${value}`}
+							avatar={<Avatar src={item.photoURL} />}
+							label={item.displayName}
 							onDelete={() => {
-								handleToggle(value);
+								handleToggle(item);
 							}}
 							className="invite-dialog__share-selected-item"
 						></Chip>

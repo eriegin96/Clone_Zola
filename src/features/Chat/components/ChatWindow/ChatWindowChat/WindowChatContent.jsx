@@ -9,9 +9,9 @@ import Message from './Message';
 import { useFirestoreMessages } from 'hooks/useFirestore';
 
 export default function WindowChatContent() {
-	const { selectedRoomId, members, messages, setMessages } = useContext(AppContext);
+	const { selectedRoom, members, messages, setMessages } = useContext(AppContext);
 	const overlayRef = useRef(null);
-	const messagesFetch = useFirestoreMessages(selectedRoomId);
+	const messagesFetch = useFirestoreMessages(selectedRoom.id);
 
 	useEffect(() => {
 		overlayRef?.current?.osInstance().scroll({ y: '100%' });
@@ -56,7 +56,7 @@ export default function WindowChatContent() {
 							<div>
 								<Card sx={{ width: '340px', margin: 'auto' }}>
 									<CardHeader
-										avatar={<Avatar src={members.photoURL} />}
+										avatar={<Avatar src={selectedRoom.photoURL || members.photoURL} />}
 										title={members.displayName}
 										subheader="Hãy bắt đầu cùng nhau chia sẻ những câu chuyện thú vị cùng nhau"
 									/>

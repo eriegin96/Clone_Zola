@@ -90,8 +90,8 @@ export default function RegisterDialog({ open, setOpen }) {
 								photoURL: user.photoURL,
 								uid: user.uid,
 								providerId: user.providerId,
-								gender: user?.gender,
-								date: user?.date,
+								gender: user?.gender || null,
+								date: user?.date || null,
 							});
 							console.log(user);
 						})

@@ -26,7 +26,7 @@ export default function BoardContact(props) {
 	const [activeBtn, setActiveBtn] = useState('addFriend');
 
 	const openChatBox = (i) => {
-		const selected = rooms.find((room) => room.members.includes(contactList[i].uid));
+		const selected = rooms.find((room) => room.members.length === 2 && room.members.includes(contactList[i].uid));
 		setMessages((prevState) => {
 			if (selected.id !== selectedRoomId) return null;
 			return prevState;

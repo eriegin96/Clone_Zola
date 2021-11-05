@@ -69,14 +69,14 @@ export const useFirestoreRecentList = (uid) => {
 
 	useEffect(() => {
 		let docRef = collection(db, 'rooms');
-		let q = query(docRef, where('members', 'array-contains', uid))
+		let q = query(docRef, where('members', 'array-contains', uid));
 
 		const unsubscribe = onSnapshot(q, (snapshot) => {
 			const data = snapshot.docs.map((doc) => {
-				const membersArr = doc.data().members.slice()
-				const index = membersArr.indexOf(uid)
-				membersArr.splice(index, 1)
-				return membersArr[0]
+				const membersArr = doc.data().members.slice();
+				const index = membersArr.indexOf(uid);
+				membersArr.splice(index, 1);
+				return membersArr[0];
 			});
 
 			setDocuments(data);
@@ -103,6 +103,7 @@ export const useFirestoreSuggestList = (uid) => {
 
 			setUserDocs(data);
 		});
+
 		const friendUnsubscribe = onSnapshot(friendRef, (snapshot) => {
 			const data = snapshot.docs.map((doc) => ({
 				...doc.data(),
@@ -111,7 +112,7 @@ export const useFirestoreSuggestList = (uid) => {
 			setFriendDocs(data);
 		});
 
-		return (userUnsubscribe, friendUnsubscribe);
+		return userUnsubscribe, friendUnsubscribe;
 	}, [uid]);
 
 	const uidList = friendDocs.map((item) => item.uid);

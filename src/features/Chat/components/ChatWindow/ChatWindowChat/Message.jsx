@@ -5,13 +5,13 @@ import moment from 'moment';
 
 export default function Message(props) {
 	const { user } = useContext(AuthContext);
-	const { text, photoURL, createdAt, uid } = props;
+	const { displayName, text, photoURL, createdAt, uid } = props;
 
 	function formatDate(seconds) {
 		let formattedDate = '';
 
 		if (seconds) {
-			formattedDate = moment(new Date(seconds * 1000), 'h:mm A').format('h:mm A');
+			formattedDate = moment(new Date(seconds * 1000), 'H:mm').format('H:mm');
 		}
 
 		return formattedDate;
@@ -27,8 +27,9 @@ export default function Message(props) {
 		>
 			<Avatar src={photoURL} />
 			<div className="chat-window__chat__container__content-conv__mess__text">
+				{uid !== user.uid && <div style={{marginLeft: '2px'}}>{displayName}</div>}
 				{text}
-				<div>{formatDate(createdAt?.seconds) || 'Đang gửi'}</div>
+				<div style={{marginTop:'8px'}}>{formatDate(createdAt?.seconds) || 'Đang gửi'}</div>
 			</div>
 		</div>
 	);

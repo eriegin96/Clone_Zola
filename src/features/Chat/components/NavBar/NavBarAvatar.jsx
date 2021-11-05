@@ -3,7 +3,7 @@ import { Box, Avatar, Menu, MenuItem, Divider, Stack } from '@mui/material';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import img from 'resources/img/avatar-invite.png';
-import InviteDialog from './Dialogs/InviteDialog/InviteDialog';
+import InviteDialog from '../Dialogs/InviteDialog/InviteDialog';
 import { AuthContext } from 'context/AuthProvider';
 
 export default function NavBarAvatar({ setOpenAccountDialog, setOpenLogoutDialog }) {

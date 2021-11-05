@@ -5,19 +5,19 @@ import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
 import SearchIcon from '@mui/icons-material/Search';
 import { Input } from 'antd';
 
-export default function BoardSearch() {
+export default function BoardSearch({ setOpenAddGroupDialog }) {
 	return (
 		<div className="board__search__box">
 			<Input
 				size="medium"
 				placeholder="Tìm kiếm"
 				prefix={<SearchIcon />}
-        className='board__search__input'
+				className="board__search__input"
 			/>
 			<IconButton title="Thêm bạn">
 				<PersonAddOutlinedIcon fontSize="small" />
 			</IconButton>
-			<IconButton title="Tạo nhóm chat">
+			<IconButton title="Tạo nhóm chat" onClick={() => setOpenAddGroupDialog(true)}>
 				<GroupAddOutlinedIcon fontSize="small" />
 			</IconButton>
 		</div>

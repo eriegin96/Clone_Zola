@@ -8,22 +8,38 @@ import ViewWeekOutlinedIcon from '@mui/icons-material/ViewWeekOutlined';
 import imgCloud from 'resources/img/cloud.jpg';
 import { AppContext } from 'context/AppProvider';
 
-export default function WindowChatHeader() {
-	const { members } = useContext(AppContext);
+export default function WindowChatHeader({ setOpenAddGroupDialog, setOpenAddToGroupDialog }) {
+	const { members, selectedRoom } = useContext(AppContext);
 
 	return (
 		<div className="chat-window__chat__header">
 			<div className="chat-window__chat__header__title">
-				<Avatar src={members?.photoURL}>{members?.displayName?.charAt(0)}</Avatar>
+				<Avatar src={selectedRoom.photoURL || members?.photoURL}>
+					{members?.displayName?.charAt(0)}
+				</Avatar>
 				<div>
 					<Typography variant="body1" component="div">
-						{members?.displayName || 'Cloud của tôi'}
+						{selectedRoom.name || members?.displayName || 'Cloud của tôi'}
 					</Typography>
-					<LabelOutlinedIcon />
+					<div>
+						{selectedRoom.members.length !== 2 && (
+							<span>{`${selectedRoom.members.length} thành viên`}</span>
+						)}
+						<LabelOutlinedIcon />
+					</div>
 				</div>
 			</div>
 			<div className="chat-window__chat__header__actions">
-				<span title="Thêm bạn vào trò chuyện">
+				<span
+					title="Thêm bạn vào trò chuyện"
+					onClick={() => {
+						if (selectedRoom.members.length === 2) {
+							setOpenAddGroupDialog(true);
+						} else {
+							setOpenAddToGroupDialog(true);
+						}
+					}}
+				>
 					<GroupAddOutlinedIcon />
 				</span>
 				<span title="Tìm kiếm tin nhắn">

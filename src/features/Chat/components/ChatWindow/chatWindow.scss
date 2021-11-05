@@ -83,14 +83,33 @@
 			.MuiAvatar-root + div {
 				flex: 1;
 
-				div {
+				div:first-child {
 					font-size: 18px;
 					font-weight: 600;
 				}
 
-				svg {
-					color: #72808e;
-					font-size: 20px;
+				div:last-child {
+					display: flex;
+					align-items: center;
+
+					span {
+						font-size: 15px;
+						color: #001a33;
+						padding-right: 8px;
+						border-right: 1px solid #eee;
+						margin-right: 8px;
+					}
+
+					svg {
+						color: #72808e;
+						font-size: 20px;
+					}
+
+					span:hover,
+					svg:hover {
+						color: #0068ff;
+						cursor: pointer;
+					}
 				}
 			}
 		}
@@ -152,7 +171,6 @@
 						.chat-window__chat__container__content-conv__mess--right,
 						.chat-window__chat__container__content-conv__mess--left {
 							display: flex;
-							align-items: center;
 							margin: 4px 0;
 
 							.chat-window__chat__container__content-conv__mess__text {

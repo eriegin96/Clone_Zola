@@ -183,7 +183,7 @@ export default function BoardChat() {
 										<ListItemIcon>
 											<Avatar
 												sx={{ width: '48px', height: '48px' }}
-												src={
+												src={room.photoURL || 
 													recentList.find((item) =>
 														room.members.includes(item.uid)
 													)?.photoURL
@@ -192,7 +192,7 @@ export default function BoardChat() {
 										</ListItemIcon>
 										<ListItemText
 											id={labelId}
-											primary={
+											primary={room.name ||
 												recentList.find((item) =>
 													room.members.includes(item.uid)
 												)?.displayName
