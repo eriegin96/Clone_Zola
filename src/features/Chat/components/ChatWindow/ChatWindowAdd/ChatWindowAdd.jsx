@@ -14,7 +14,8 @@ export default function ChatWindowAdd({ addFriend, suggestList }) {
 	const { groupList } = useContext(AppContext);
 
 	const handleCloseSuggest = (i) => {
-		console.log(i);
+		suggestList.splice(i,1)
+		return suggestList
 	};
 
 	const handleClick = (i) => {
@@ -62,7 +63,7 @@ export default function ChatWindowAdd({ addFriend, suggestList }) {
 										</Button>
 										<CloseIcon
 											className="chat-window__add__close-suggest"
-											onClick={(i) => handleCloseSuggest(i)}
+											onClick={() => handleCloseSuggest(i)}
 										/>
 									</Paper>
 								</Grid>

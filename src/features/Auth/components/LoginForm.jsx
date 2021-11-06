@@ -96,7 +96,6 @@ export default function LoginForm({ setOpenUserNotFoundDialog }) {
 		signInWithPopup(auth, provider)
 			.then((result) => {
 				const { _tokenResponse, user } = result;
-				console.log(user)
 				checkUserExist(_tokenResponse, user);
 			})
 			.catch((error) => {
@@ -194,14 +193,14 @@ export default function LoginForm({ setOpenUserNotFoundDialog }) {
 						</div>
 					</Stack>
 					{/* Create fake data */}
-					<Button
+					{/* <Button
 						variant="contained"
 						color="warning"
 						fullWidth
 						onClick={() => createUsersData()}
 					>
 						Create User Data
-					</Button>
+					</Button> */}
 					<Link underline="hover" className="form__forgot-password">
 						{isVN ? 'Quên mật khẩu?' : 'Forgot password?'}
 					</Link>

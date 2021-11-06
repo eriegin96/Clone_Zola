@@ -50,6 +50,7 @@ export default function NavBarSetting({setOpenAccountDialog, setOpenLogoutDialog
 				}}
 				transformOrigin={{ horizontal: 'right', vertical: 'bottom' }}
 				anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
+				className='navbar__setting__menu'
 			>
 				<MenuItem
 					className="navbar__setting__menu__item"

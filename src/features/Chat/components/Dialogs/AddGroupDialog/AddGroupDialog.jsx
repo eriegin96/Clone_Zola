@@ -1,12 +1,10 @@
-import React, { useContext, useRef, useState } from 'react';
-import axios from 'axios';
+import React, { useContext, useState } from 'react';
 import {
 	Button,
 	Dialog,
 	DialogTitle,
 	DialogActions,
 	IconButton,
-	Typography,
 	Chip,
 	Stack,
 	Avatar,
@@ -21,7 +19,6 @@ import ContactList from './ContactList';
 import { AuthContext } from 'context/AuthProvider';
 import { useFirestoreContactList } from 'hooks/useFirestore';
 import { createGroup } from 'firebase/services';
-import { AppContext } from 'context/AppProvider';
 
 const cates = [
 	{

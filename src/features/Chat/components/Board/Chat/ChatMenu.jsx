@@ -19,13 +19,11 @@ export default function ChatMenu(props) {
 			}}
 			transformOrigin={{ horizontal: 'left', vertical: 'bottom' }}
 			anchorOrigin={{ horizontal: 'center', vertical: 'top' }}
+			className="board__chat__menu"
 		>
 			<MenuItem className="board__chat__menu__item">
 				<span className="board__chat__text">Phân loại {i}</span>
-				<ChevronRightOutlinedIcon
-					fontSize="small"
-					className="board__chat__arrow-right"
-				/>
+				<ChevronRightOutlinedIcon fontSize="small" className="board__chat__arrow-right" />
 			</MenuItem>
 			<MenuItem className="board__chat__menu__item">
 				<span className="board__chat__text">Đánh dấu chưa đọc</span>
@@ -36,20 +34,14 @@ export default function ChatMenu(props) {
 			</MenuItem>
 			<MenuItem className="board__chat__menu__item">
 				<span className="board__chat__text">Tắt thông báo</span>
-				<ChevronRightOutlinedIcon
-					fontSize="small"
-					className="board__chat__arrow-right"
-				/>
+				<ChevronRightOutlinedIcon fontSize="small" className="board__chat__arrow-right" />
 			</MenuItem>
 			<MenuItem className="board__chat__menu__item">
 				<span className="board__chat__text">Ẩn trò chuyện</span>
 			</MenuItem>
 			<MenuItem className="board__chat__menu__item">
 				<span className="board__chat__text">Tin nhắn tự xóa</span>
-				<ChevronRightOutlinedIcon
-					fontSize="small"
-					className="board__chat__arrow-right"
-				/>
+				<ChevronRightOutlinedIcon fontSize="small" className="board__chat__arrow-right" />
 			</MenuItem>
 			<Divider variant="middle" sx={{ margin: '4px 16px !important' }} />
 			<MenuItem className="board__chat__menu__item">

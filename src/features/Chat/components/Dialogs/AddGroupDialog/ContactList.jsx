@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useRef } from 'react';
 import {
 	Grid,
 	List,
@@ -11,14 +11,10 @@ import {
 	Typography,
 	Slide,
 } from '@mui/material';
-import { AppContext } from 'context/AppProvider';
 
 export default function ContactList(props) {
 	const { left, right, setRight } = props;
 	const containerRef = useRef(null);
-	const {
-		selectedRoom: { members },
-	} = useContext(AppContext);
 
 	const handleToggle = (value) => {
 		const currentIndex = right.indexOf(value);

@@ -5,7 +5,6 @@ import {
 	DialogTitle,
 	DialogActions,
 	IconButton,
-	Typography,
 	Chip,
 	Stack,
 } from '@mui/material';
@@ -16,7 +15,7 @@ import { Input } from 'antd';
 import ContactList from './ContactList';
 import { AuthContext } from 'context/AuthProvider';
 import { useFirestoreContactList } from 'hooks/useFirestore';
-import { addGroup, addUserToGroup } from 'firebase/services';
+import { addUserToGroup } from 'firebase/services';
 import { AppContext } from 'context/AppProvider';
 
 const cates = [

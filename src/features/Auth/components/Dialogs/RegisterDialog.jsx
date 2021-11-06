@@ -98,7 +98,6 @@ export default function RegisterDialog({ open, setOpen }) {
                 date: user?.date || null,
               });
               setRegisterSuccessful(true);
-              console.log(user);
             })
             .catch((error) => {
               switch (error.code) {
@@ -107,9 +106,6 @@ export default function RegisterDialog({ open, setOpen }) {
                   break;
                 case "auth/invalid-email":
                   setInvalidEmail(true);
-                  break;
-                case "auth/operation-not-allowed":
-                  console.log(error.code);
                   break;
                 default:
                   break;

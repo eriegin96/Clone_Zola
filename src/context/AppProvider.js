@@ -1,11 +1,7 @@
 import React, { createContext, useContext, useMemo, useState } from 'react';
 import {
 	useFirestore,
-	useFirestoreContactList,
-	useFirestoreMessages,
 	useFirestoreObject,
-	useFirestoreRecentList,
-	useFirestoreSuggestList,
 } from 'hooks/useFirestore';
 import { AuthContext } from './AuthProvider';
 
@@ -52,7 +48,7 @@ export default function AppProvider({ children }) {
 			operator: 'in',
 			compareValue: newArr,
 		};
-	}, [selectedRoom]);
+	}, [selectedRoom, user]);
 	const members = useFirestoreObject('users', membersCondition);
 
 	return (

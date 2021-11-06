@@ -3,6 +3,7 @@ import { Tabs, Tab, Typography, Box } from '@mui/material';
 import { AppContext } from 'context/AppProvider';
 import LoginForm from './LoginForm';
 import LoginQrError from './LoginQrError';
+import img from 'resources/img/qr.png';
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -31,14 +32,17 @@ export default function LoginTabs({ setOpenUserNotFoundDialog }) {
 	const { isVN } = useContext(AppContext);
 	const [value, setValue] = useState(0);
 	const [isQrError, setIsQrError] = useState(false);
+	const [imgQr, setImgQr] = useState(img);
 
 	useEffect(() => {
 		const time = setTimeout(() => {
 			setIsQrError(true);
 		}, 10000);
 
-		return clearTimeout(time);
-	}, []);
+		return () => {
+			clearTimeout(time);
+		};
+	}, [isQrError]);
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
@@ -69,14 +73,12 @@ export default function LoginTabs({ setOpenUserNotFoundDialog }) {
 			<TabPanel value={value} index={0} className="login__form__tab-panel">
 				<div className="login__qr__wrapper">
 					{isQrError ? (
-						<LoginQrError setIsQrError={setIsQrError} />
+						<LoginQrError setIsQrError={setIsQrError} imgQr={imgQr} setImgQr={setImgQr} />
 					) : (
-						<img src="./img/qr.png" alt="qrcode" className="login__qr__img" />
+						<img src={imgQr} alt="qrcode" className="login__qr__img" />
 					)}
 					<Typography variant="body2" component="p" sx={{ color: '#888' }}>
-						{isVN
-							? 'Quét mã QR bằng Zalo để đăng nhập'
-							: 'Scan the QR code with Zalo to log in'}
+						{isVN ? 'Quét mã QR bằng Zalo để đăng nhập' : 'Scan the QR code with Zalo to log in'}
 					</Typography>
 				</div>
 			</TabPanel>

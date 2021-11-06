@@ -4,9 +4,6 @@ import {
 	query,
 	where,
 	collection,
-	doc,
-	getDoc,
-	getDocs,
 	onSnapshot,
 	orderBy,
 } from 'firebase/firestore';
@@ -112,7 +109,7 @@ export const useFirestoreSuggestList = (uid) => {
 			setFriendDocs(data);
 		});
 
-		return userUnsubscribe, friendUnsubscribe;
+		return (userUnsubscribe, friendUnsubscribe);
 	}, [uid]);
 
 	const uidList = friendDocs.map((item) => item.uid);
@@ -161,7 +158,7 @@ export const useFirestoreObject = (collectionName, condition) => {
 					condition.fieldName,
 					condition.operator,
 					condition.compareValue
-				) /* , orderBy('createdAt') */
+				)
 			);
 		}
 

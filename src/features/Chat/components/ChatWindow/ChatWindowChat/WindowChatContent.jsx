@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useMemo, useRef, useLayoutEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { Skeleton, Card, Avatar, CardHeader, CardMedia, Stack, Box } from '@mui/material';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import imgCloud from 'resources/img/cloud.jpg';
 import imgNewFriend from 'resources/img/chat-window/new-friend.png';
 import { AppContext } from 'context/AppProvider';
-import { AuthContext } from 'context/AuthProvider';
 import Message from './Message';
 import { useFirestoreMessages } from 'hooks/useFirestore';
 
@@ -16,7 +15,7 @@ export default function WindowChatContent() {
 	useEffect(() => {
 		overlayRef?.current?.osInstance().scroll({ y: '100%' });
 		setMessages(messagesFetch);
-	}, [messagesFetch]);
+	}, [messagesFetch, setMessages]);
 
 	return (
 		<div className="chat-window__chat__container__content">

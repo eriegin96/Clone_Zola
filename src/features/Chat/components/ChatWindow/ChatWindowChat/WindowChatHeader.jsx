@@ -14,7 +14,7 @@ export default function WindowChatHeader({ setOpenAddGroupDialog, setOpenAddToGr
 	return (
 		<div className="chat-window__chat__header">
 			<div className="chat-window__chat__header__title">
-				<Avatar src={selectedRoom.photoURL || members?.photoURL}>
+				<Avatar src={selectedRoom.photoURL || members?.photoURL || imgCloud}>
 					{members?.displayName?.charAt(0)}
 				</Avatar>
 				<div>

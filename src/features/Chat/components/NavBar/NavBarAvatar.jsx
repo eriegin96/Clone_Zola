@@ -36,11 +36,9 @@ export default function NavBarAvatar({ setOpenAccountDialog, setOpenLogoutDialog
 				}}
 				transformOrigin={{ horizontal: 'right', vertical: 'top' }}
 				anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+				className="navbar__avatar__menu"
 			>
-				<MenuItem
-					className="navbar__avatar__menu__item"
-					onClick={() => setOpenAccountDialog(true)}
-				>
+				<MenuItem className="navbar__avatar__menu__item" onClick={() => setOpenAccountDialog(true)}>
 					<PermIdentityIcon fontSize="small" />
 					<span>Tài khoản</span>
 				</MenuItem>
@@ -49,10 +47,7 @@ export default function NavBarAvatar({ setOpenAccountDialog, setOpenLogoutDialog
 					<span>Cài đặt</span>
 				</MenuItem>
 				<Divider variant="middle" className="navbar__avatar__menu__divider" />
-				<MenuItem
-					className="navbar__avatar__menu__item"
-					onClick={() => setOpenLogoutDialog(true)}
-				>
+				<MenuItem className="navbar__avatar__menu__item" onClick={() => setOpenLogoutDialog(true)}>
 					<span style={{ color: '#db342e', marginLeft: '24px' }}>Đăng xuất</span>
 				</MenuItem>
 				<Divider variant="middle" className="navbar__avatar__menu__divider" />
