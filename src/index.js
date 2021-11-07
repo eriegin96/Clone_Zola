@@ -4,6 +4,8 @@ import { CssBaseline } from '@mui/material';
 import { BrowserRouter } from 'react-router-dom';
 import 'overlayscrollbars/css/OverlayScrollbars.css';
 import './index.scss';
+import '@fontsource/roboto';
+import '@fontsource/poppins';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import AuthProvider from './context/AuthProvider';

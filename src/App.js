@@ -1,9 +1,6 @@
 import React, { useContext } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import '@fontsource/roboto';
-import '@fontsource/poppins';
-
 import { AuthContext } from './context/AuthProvider';
 import LoginPage from './features/Auth/pages/LoginPage';
 import ChatPage from './features/Chat/pages/ChatPage';

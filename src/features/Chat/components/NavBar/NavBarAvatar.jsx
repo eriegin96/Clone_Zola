@@ -20,7 +20,7 @@ export default function NavBarAvatar({ setOpenAccountDialog, setOpenLogoutDialog
 
 	return (
 		<Box className="navbar__avatar-box">
-			<Avatar onClick={handleClick} className="navbar__avatar">
+			<Avatar src={user.photoURL} onClick={handleClick} className="navbar__avatar">
 				{user.displayName.charAt(0)}
 			</Avatar>
 			<Menu
